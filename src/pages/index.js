@@ -1,11 +1,109 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
+import {
+  Avatar,
+  Button,
+  Divider,
+  Grid,
+  Indicator,
+  Space,
+  Text,
+  Title,
+  useMantineTheme,
+} from "@mantine/core";
+import Link from "next/link";
+import BsArrowRight from "react-icons/bs";
+import { Carousel } from "@mantine/carousel";
+import {SiTesla} from "react-icons/si";
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const theme = useMantineTheme();
+  let cardContents = [
+    {
+      name: "Zážitkové jízdy",
+      description: "Zažijte maximální rychlost až 290 kilometrů za hodinu",
+      image: "/images/zazitkove_jizdyb.jpg",
+      color: theme.colors.primary[4],
+      link: "/zazitkove-jizdy",
+    },
+    {
+      name: "Pronájem",
+      description: "Užívejte si komfortu při cestování s nabíjením zdarma",
+      image: "/images/pronajemb.jpg",
+      color: "#71E4D3",
+      link: "/pronajem",
+    },
+    {
+      name: "Taxi",
+      description: "Spolehněte se na klidný a bezpečný odvoz",
+      image: "/images/taxib.jpg",
+      color: "#E1E471",
+      link: "/taxi",
+    },
+    {
+      name: "Akce",
+      description: "Reprezentujte se s prémiovým vozem Tesla S.",
+      image: "/images/akce.avif",
+      color: "#8171E4",
+      link: "/akce",
+    },
+  ];
+  let slides = [
+    {
+      name: "Nabíjení zdarma",
+      description:
+        "Nedělejte si starosti s provozem. Díky rozrůstající se síti nabíjecích stanic Tesla Supercharger se nemusíte bát o nabíjení v Česku, ani okolních státech, kde je sít ještě rozšířenější. Navíc při pronájmu naší tesly máte zajištěno nabíjení zdarma u všech nabíjecích stanic společnosti Tesla",
+      img: "/images/teslaMap.png",
+      color: "#19E3C5",
+    },
+    {
+      name: "Místo pro vše",
+      description:
+        "Vezměte na výlet celou rodinu. Přes sportovní ladění vozu je Tesla S též vhodným autem pro cestování za zážitky. Do kufru s objemem 722 litrů se vejdou nejen zavazadla ale i kola, lyže či jiné sportovní doplňky.",
+      img: "/images/teslaKufr.png",
+      color: "#19BFE3",
+    },
+    {
+      name: "Klidná jízda",
+      description:
+        "Za vašeho dozoru umožňuje Autopilot vozu v rámci vašeho pruhu automaticky řídit, zrychlovat a brzdit. Pomáhá vám tak s nejnáročnější částí řízení. S over-the-air aktualizacemi jsou nejnovější funkce okamžitě k dispozici.",
+      img: "/images/teslaKlid.png",
+      color: "#DFE319",
+    },
+    {
+      name: "Bezpečí na prvním místě",
+      description:
+        "Bezpečnost je nejdůležitější u každého vozu Tesla. Tesla S je navržena tak, aby překračovaly bezpečnostní standardy. Model S získal v roce 2022 5 hvězdiček v hodnocení bezpečnosti Euro NCAP a získal ocenění Nejlepší ve své třídě v kategoriích Executive a Pure Electric.",
+      img: "/images/teslaSafe.png",
+      color: "#E3AA19",
+    },
+  ];
+  let blogPosts = [
+    {
+    heading: "Změna otevírací doby",
+    date: "1.1.2022",
+    text: "Od 17.9. do 16.10. bude provoz našich služeb na okruhu Blansko a Jindřichov omezen z důvodu úpravy povrchu trati. ",
+    href: "/blog/zmena-oteviraci-doby",
+    color: "#19E3C5",
+  },
+  {
+    heading: "Změna otevírací doby",
+    date: "1.1.2022",
+    text: "Od 17.9. do 16.10. bude provoz našich služeb na okruhu Blansko a Jindřichov omezen z důvodu úpravy povrchu trati. ",
+    href: "/blog/zmena-oteviraci-doby",
+    color: "#19E3C5",
+  },
+  {
+    heading: "Změna otevírací doby",
+    date: "1.1.2022",
+    text: "Od 17.9. do 16.10. bude provoz našich služeb na okruhu Blansko a Jindřichov omezen z důvodu úpravy povrchu trati. ",
+    href: "/blog/zmena-oteviraci-doby",
+    color: "#19E3C5",
+  },
+]
   return (
     <>
       <Head>
@@ -14,101 +112,491 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
+      <section
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          flexDirection: "column",
+          maxHeight: "700px",
+        }}
+      >
+        <div
+          style={{
+            width: "180vw",
+            height: "180vw",
+            minWidth: "200vw",
+            minHeight: "200vw",
+            borderRadius: "50%",
+            backgroundImage: `url("/images/black_tesla.jpg")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            position: "relative",
+            left: "-20.5vw",
+            top: "-50.5vw",
+            paddingLeft: "75vw",
+            paddingTop: "75.5vw",
+            display: "flex",
+            flexDirection: "column",
+            gap: "2vh",
+          }}
+        >
+          <Title
+            order={1}
+            style={{ color: "#ffffff", zIndex: 1, fontSize: "3.5rem" }}
+          >
+            Vaše jízda, <br /> naše starost
+          </Title>
+          <Divider
+            sx={{ marginTop: "8vh", width: "50vw" }}
+            size={"xl"}
+            color={theme.colors.neutral[1]}
+          />
+          <Text color={theme.colors.neutral[2]} sx={{ maxWidth: "90vw" }}>
+            Zajištujeme vaše zážitky, ať už to je jízda na okruhu, pracovní
+            cesta, či společenská uzdálost. Jsme tu pro vás
+          </Text>
+        </div>
+        <Link href={"/"} style={{ marginTop: "-150px" }}>
+          {" "}
+          <Button
+            rightIcon={"->"}
+            size="xl"
+            sx={{ fontSize: "1rem", width: "90vw" }}
+            radius={60}
+            color={"dark"}
+          >
+            Naše nabídka
+          </Button>
+        </Link>
+      </section>
+
+      <section
+        style={{
+          padding: "5vh 10vw",
+          display: "flex",
+          flexDirection: "column",
+          gap: "4vh",
+          alignItems: "flex-start",
+        }}
+      >
+        <Title weight={600} order={2} size={"2.3rem"} style={{}}>
+          Kdo jsme
+        </Title>
+        <Text sx={{ fontSize: "1rem", lineHeight: "175%" }}>
+          Jsme nadšenci do rychlých aut a inovací. Baví nás rychle jezdit na
+          okruhu i si užívat klidné jízdy v příjemném interiéru luxusních aut.
+          Chceme tento zážitek poskytnout i vám a proto vám nabízíme naše služby
+          na vaší cestě.
+        </Text>
+        <Link href={"/o-nas"}>
+          <Button
+            size="lg"
+            rightIcon="->"
+            variant="white"
+            sx={{
+              paddingLeft: "0",
+              color: theme.colors.neutral[7],
+              fontWeight: "700",
+              fontSize: "1.1rem",
+            }}
+          >
+            Více o nás
+          </Button>
+        </Link>
+      </section>
+      <section
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "4vh",
+          alignItems: "flex-start",
+        }}
+      >
+        <div
+          style={{
+            padding: "5vh 10vw",
+            display: "flex",
+            flexDirection: "column",
+            gap: "4vh",
+          }}
+        >
+          <Title weight={600} order={2} size={"2.3rem"} style={{}}>
+            Naše služby
+          </Title>
+          <Text sx={{ fontSize: "1rem", lineHeight: "175%" }}>
+            Pronajímáme Teslu S se kterou se můžete projet na okruhu, zajet si
+            kam potřebujete, nebo vás rádi odvezeme
+          </Text>
+        </div>
+        <div>
+          {cardContents.map((card) => {
+            return (
+              <Link href={card.link}>
+                <div
+                  style={{
+                    background:
+                      "url(" + card.image + ") lightgray 50% / cover no-repeat",
+                    height: "25vh",
+                    minHeight: "200px",
+                    backdropFilter: "saturate(0)",
+                    padding: "3vh 6vw",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Title
+                    order={3}
+                    sx={{
+                      fontSize: "1.8rem",
+                      color: theme.colors.neutral[0],
+                      fontWeight: "600",
+                    }}
+                  >
+                    {card.name}
+                  </Title>
+                  <Text
+                    sx={{
+                      color: theme.colors.neutral[0],
+                      maxWidth: "70%",
+                      marginTop: "auto",
+                    }}
+                  >
+                    {card.description}
+                  </Text>
+                  <Divider
+                    sx={{
+                      marginTop: "3vh",
+                      width: "90vw",
+                      filter: "saturate(1)",
+                    }}
+                    size={"xl"}
+                    color={card.color}
+                  />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+        <Link href={"/sluzby"}>
+          <Button
+            size="lg"
+            rightIcon="->"
+            variant="white"
+            sx={{
+              color: theme.colors.neutral[7],
+              fontWeight: "700",
+              fontSize: "1.1rem",
+            }}
+          >
+            Všechny naše služby
+          </Button>
+        </Link>
+      </section>
+      <section
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "4vh",
+          alignItems: "flex-start",
+        }}
+      >
+        <div
+          style={{
+            padding: "5vh 10vw",
+            display: "flex",
+            flexDirection: "column",
+            gap: "5vh",
+            alignItems: "flex-start",
+          }}
+        >
+          <Title weight={600} order={2} size={"2.3rem"} style={{}}>
+            Naše Tesla
+          </Title>
+          <div
+            style={{ position: "relative", width: "80vw", minHeight: "25vh" }}
+          >
+            <Image
+              src={"/images/ourTesla.png"}
+              layout={"fill"}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          <Grid sx={{ width: "100%" }}>
+            <Grid.Col
+              span={4}
+              sx={{ display: "flex", flexDirection: "column" }}
             >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
+                322
+              </Text>
+              <Text size={"1rem"} align="center" sx={{}}>
+                km/h
+              </Text>
+            </Grid.Col>
+            <Grid.Col
+              span={4}
+              sx={{ display: "flex", flexDirection: "column" }}
+            >
+              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
+                634
+              </Text>
+              <Text size={"1rem"} align="center" sx={{}}>
+                km dojezd
+              </Text>
+            </Grid.Col>
+            <Grid.Col
+              span={4}
+              sx={{ display: "flex", flexDirection: "column" }}
+            >
+              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
+                3,2
+              </Text>
+              <Text size={"1rem"} align="center" sx={{}}>
+                s 0-100
+              </Text>
+            </Grid.Col>
+          </Grid>
+          <Text>
+            Konstrukce vozu Model S umožňuje vynikající rychlost a dojezd s
+            úchvatným zrychlením a může se chlubit bezkonkurenčním výkonem a
+            vytříbeným designem.
+          </Text>
+        </div>
+        <Carousel loop withIndicators sx={{ width: "100%", height: "90vh" }}>
+          {slides.map((slide, index) => {
+            return (
+              <Carousel.Slide
+                sx={{
+                  backgroundColor: slide.color,
+                  width: "100%",
+                  height: "90vh",
+                  padding: "5vh 8vw",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div>
+                  <div>
+                    {" "}
+                    <Text size="0.9rem" weight={700}>
+                      {index + 1} /
+                    </Text>
+                    <Title size={"1.8rem"} order={3}>
+                      {slide.name}
+                    </Title>
+                  </div>
+                  <Text
+                    sx={{ fontFamily: theme.other.fira_code, marginTop: "3vh" }}
+                  >
+                    {slide.description}
+                  </Text>
+                </div>
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    height: "40vh",
+                  }}
+                >
+                  <Image
+                    src={slide.img}
+                    layout={"fill"}
+                    style={{ objectFit: "contain" }}
+                  />
+                </div>
+              </Carousel.Slide>
+            );
+          })}
+        </Carousel>
+        <Link href={"/sluzby"}>
+          <Button
+            size="lg"
+            rightIcon="->"
+            variant="white"
+            sx={{
+              color: theme.colors.neutral[7],
+              fontWeight: "700",
+              fontSize: "1.1rem",
+              marginBottom: "4vh",
+            }}
+          >
+            Více o pronájmu
+          </Button>
+        </Link>
+      </section>
+      <section
+        style={{
+          padding: "5vh 10vw",
+          display: "flex",
+          flexDirection: "column",
+          gap: "4vh",
+        }}
+      >
+        <Title weight={600} order={2} size={"2.3rem"} style={{}}>
+          Naši zákazníci
+        </Title>
+        <Text sx={{fontFamily: theme.other.fira_code}}>
+          Moc milý a ochotný pan, který i přes naše drobný problémy se choval
+          moc hezky, vše vysvětlil, zodpověděl, ukázal a sladil dle našich
+          přání. A i dost nad naše očekávání. Takže po 20 minutách mi přišlo jak
+          když jsme přišli i s ním. Odpovídal i na otázky ze soukromí, na které
+          nemusel. Moc jsme si to užili. Takže pro všechny kdo se rozhodují –
+          jděte do toho!!!
+        </Text>
+        <div style={{display: "flex", gap: "6vw"}}>
+          <Avatar size={"lg"} radius={""} color="red"><SiTesla /></Avatar>
+          <div style={{display: "flex", flexDirection: "column", justifyContent: "space-around"}}>
+            <Text weight={700}>Alena Špačková</Text>
+            <Text weight={400}>zážitková jízda na okruhu</Text>
           </div>
         </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
+       
+      </section>
+      <Link href={"/o-nas"}>
+          <Button
+            size="lg"
+            rightIcon="->"
+            variant="white"
+            sx={{
+              color: theme.colors.neutral[7],
+              fontWeight: "700",
+              fontSize: "1.1rem",
+              marginBottom: "4vh",
+            }}
           >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-    </>
-  )
+            Chci zážitek jako Alena
+          </Button>
+        </Link>
+        <section
+         style={{
+          padding: "5vh 0 5vh 10vw",
+          display: "flex",
+          flexDirection: "column",
+          gap: "4vh",
+        }}
+        >
+        <Title weight={600} order={2} size={"2.3rem"} style={{}}>
+          Blog
+        </Title>
+        <Grid sx={{ width: "100%" }}>
+     {blogPosts.map((post, index)=> {
+let {heading, date, text, href, color} = post
+function hexToRGBA(hex, opacity = 1) {
+  const [r, g, b] = hex.match(/\w\w/g).map((xx) => parseInt(xx, 16));
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
+      return(
+        <Grid.Col
+  span={12}
+  sx={{
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "left",
+    justifyContent: "center",
+    padding: "4vh 10vw",
+    marginBottom: "2vh",
+    backgroundColor: hexToRGBA(color, 0.5),
+    
+    '::before': {
+      content: '""',
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      background: 'url(/images/backgroundAbstract.jpg) lightgray 50% / cover no-repeat',
+      opacity: 0.25,
+      zIndex: -1,
+    }
+  }}
+>
+            <Title order={4} size={"1.4rem"} style={{}}>{heading}</Title>
+            <Text size={"0.9rem"} weight={700} style={{marginBottom: "3vh"}}>{date}</Text>
+           
+            <Text>{text}</Text>
+            <Link href={href}>
+          <Button
+            size="lg"
+            rightIcon="->"
+            variant="white"
+            sx={{
+              marginTop: "3vh",
+              color: theme.colors.neutral[7],
+              fontWeight: "700",
+              fontSize: "1.1rem",
+              marginBottom: "4vh",
+              paddingLeft: "0",
+              backgroundColor: "transparent",
+              marginBottom: "0",
+            }}
+          >
+            Číst dále
+          </Button>
+        </Link>
+          </Grid.Col>
+      )
+     })}
+        </Grid>
+        <Link href={"/o-nas"}>
+          <Button
+            size="lg"
+            rightIcon="->"
+            variant="white"
+            sx={{
+              color: theme.colors.neutral[7],
+              fontWeight: "700",
+              fontSize: "1.1rem",
+              marginBottom: "0",
+              paddingLeft: "0",
+            }}
+          >
+            další příspěvky
+          </Button>
+        </Link>
+        </section>
+        <section
+        style={{
+          padding: "5vh 10vw",
+          display: "flex",
+          flexDirection: "column",
+          gap: "4vh",
+        }}
+      >
+        <Title weight={600} order={2} size={"2.3rem"} style={{}}>
+          Kam dále?
+        </Title>
+        <Link href={"/o-nas"}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="302" height="24" viewBox="0 0 302 24" fill="none">
+  <path d="M301.061 13.0607C301.646 12.4749 301.646 11.5251 301.061 10.9393L291.515 1.3934C290.929 0.807611 289.979 0.807611 289.393 1.3934C288.808 1.97919 288.808 2.92893 289.393 3.51472L297.879 12L289.393 20.4853C288.808 21.0711 288.808 22.0208 289.393 22.6066C289.979 23.1924 290.929 23.1924 291.515 22.6066L301.061 13.0607ZM0 13.5H300V10.5H0V13.5Z" fill="#CDE441"/>
+</svg>
+<Text size={"xl"} weight={600}>O nás</Text>
+        </Link>
+        <Link href={"/sluzby"}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="242" height="23" viewBox="0 0 242 23" fill="none">
+  <path d="M241.061 12.3942C241.646 11.8084 241.646 10.8586 241.061 10.2728L231.515 0.726894C230.929 0.141108 229.979 0.141108 229.393 0.726894C228.808 1.31268 228.808 2.26243 229.393 2.84822L237.879 11.3335L229.393 19.8188C228.808 20.4046 228.808 21.3543 229.393 21.9401C229.979 22.5259 230.929 22.5259 231.515 21.9401L241.061 12.3942ZM0 12.8335H240V9.8335H0V12.8335Z" fill="#41E4CC"/>
+</svg>
+<Text size={"xl"} weight={600}>Služby</Text>
+        </Link>
+        <Link href={"/blog"}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="194" height="23" viewBox="0 0 194 23" fill="none">
+  <path d="M193.061 12.7272C193.646 12.1414 193.646 11.1916 193.061 10.6058L183.515 1.0599C182.929 0.474115 181.979 0.474115 181.393 1.0599C180.808 1.64569 180.808 2.59544 181.393 3.18122L189.879 11.6665L181.393 20.1518C180.808 20.7376 180.808 21.6873 181.393 22.2731C181.979 22.8589 182.929 22.8589 183.515 22.2731L193.061 12.7272ZM0 13.1665H192V10.1665H0V13.1665Z" fill="#41BDE4"/>
+</svg>
+<Text size={"xl"} weight={600}>Blog</Text>
+
+        </Link>
+        <Link href={"/kontakt"}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="156" height="24" viewBox="0 0 156 24" fill="none">
+  <path d="M154.661 13.0607C155.246 12.4749 155.246 11.5251 154.661 10.9393L145.115 1.3934C144.529 0.807611 143.579 0.807611 142.993 1.3934C142.408 1.97919 142.408 2.92893 142.993 3.51472L151.479 12L142.993 20.4853C142.408 21.0711 142.408 22.0208 142.993 22.6066C143.579 23.1924 144.529 23.1924 145.115 22.6066L154.661 13.0607ZM0 13.5H153.6V10.5H0V13.5Z" fill="#4152E4"/>
+</svg>
+<Text size={"xl"} weight={600}>Kontakt</Text>
+        </Link>
+        </section>
+    </>
+  );
+}
+

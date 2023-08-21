@@ -1,0 +1,91 @@
+.main_mobile{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10vh;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+   
+    
+}
+.header_mobile{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    
+    height: 100%;
+    gap: 2vh;
+
+}
+.openedMenu_mobile{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-width: 95vw;
+    align-items: right;
+    padding: 5vh 5vw;
+    gap: 5vh;
+    
+}
+.main_tablet{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10vh;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+.header_tablet{
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    height: 100%;
+}
+.openedMenu_tablet{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    gap: 5%;
+
+    
+}
+.main_laptop{
+    width: 100%;
+    height: fit-content;
+    max-height: 20vh;
+}
+.header_laptop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+   
+}
+.header_laptop > * > * > p{
+    color: #eeee;
+    font-weight: 600;
+    transition: 0.5s;
+}
+.header_laptop > * > p{
+    color: #eeee;
+    font-weight: 600;
+    transition: 0.5s;
+}
+.header_laptop > * > p:hover{
+    color: #cccccc;
+    font-weight: 600;
+    cursor: pointer;
+}
+.header_laptop > * > * > p:hover{
+    color: #cccccc;
+    font-weight: 600;
+    cursor: pointer;
+}
+.main_tv{
+
+}
