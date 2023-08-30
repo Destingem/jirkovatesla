@@ -15,6 +15,7 @@ import { useViewportSize, useWindowScroll } from "@mantine/hooks";
 import Image from "next/image";
 import Logo from "../../../../public/images/JirkaLogo.png";
 import NavBarMobile from "./NavbarMobile";
+import { useRouter } from "next/router";
 export default function Navbar({motion}) {
   var theme = useMantineTheme();
   const itemsSluzby = [
@@ -57,7 +58,7 @@ export default function Navbar({motion}) {
       zIndex: 1850,
       padding: "0vh 0",
       transition: "all 0.3s ease-in-out",
-      backgroundColor: scroll.y > 1 ? theme.colors.cyan[1]: "transparent",
+    
     
       
     },
@@ -91,7 +92,7 @@ export default function Navbar({motion}) {
     link: {
       position: "relative",
       marginLeft: theme.spacing.md,
-      color: theme.colors.dark[8],
+    
       whiteSpace: "nowrap",
       fontSize: theme.spacing.xl * 0.8,
       fontWeight: 500,
@@ -115,9 +116,51 @@ export default function Navbar({motion}) {
   }));
 
   const { classes } = useStyles();
-
+  const router = useRouter();
+  console.log(router);
+  let textColor = "#ffffff"
+  let backgroundColor = theme.colors.cyan[1]
+  switch (router.pathname) {
+    case "/":
+      textColor = "#ffffff"
+      break;
+    case "/o-nas":
+      textColor = "#000"
+      break;
+    case "/sluzby":
+      textColor = "#000"
+      break;
+    case "/rezervace":
+      textColor = "#000"
+      break;
+    case "/blog":
+      textColor = "#000"
+      break;
+    case "/kontakt":
+      textColor = "#000"
+      break;
+    case "/zazitkove-jizdy":
+      textColor = theme.colors.primary[8]
+      backgroundColor = "#f3c7c6"
+      break;
+    case "/pronajem":
+      textColor = theme.colors.teal[9]
+      backgroundColor = "#c7f3c7"
+      break;
+    case "/taxi":
+      textColor = theme.colors.yellow[9]
+      backgroundColor = "#f2eec6"
+      break;
+    case "/akce":
+      textColor = theme.colors.grape[9]
+      backgroundColor = "#dec7f2"
+      break;
+    default:
+      textColor = "#000"
+      break;
+  }
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.wrapper} style={{  backgroundColor: scroll.y > 1 ? backgroundColor : "transparent",}}>
       <Paper
         className={classes.root}
         shadow="none"
@@ -137,7 +180,7 @@ export default function Navbar({motion}) {
               <Link href={"/"} className={classes.logoContainer}>
                 <Image src={Logo} width={50} height={50} style={{}} />
                 <div>
-                <Text size="xl" weight={600}>
+                <Text color={scroll.y > 1 ? "#000" : textColor } size="xl" weight={600}>
                   Jirkova tesla
                 </Text>
              
@@ -159,7 +202,7 @@ export default function Navbar({motion}) {
                     
                     return(
                   <Link href={link.href} key={index}>
-                    <Text className={classes.link}>
+                    <Text className={classes.link} color={scroll.y > 1 ? "#000" : textColor }>
                       {link.label}
                       <div className={classes.linkHover} />
                     </Text>
@@ -170,7 +213,7 @@ export default function Navbar({motion}) {
                     return(
                   <Menu position="bottom-start" offset={20} key={index} opened={opened} onChange={setOpened}>
                   <Menu.Target >
-                  <Text onMouseEnter={()=> {setOpened(true)}} className={classes.link}>
+                  <Text onMouseEnter={()=> {setOpened(true)}} className={classes.link} color={scroll.y > 1 ? "#000" : textColor }>
                       {link.label}
                       <div className={classes.linkHover} />
                     </Text>

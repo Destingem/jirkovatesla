@@ -54,7 +54,7 @@ export default function NavBarMobile(props) {
     <div
       className={styles.main_mobile}
       style={{
-        backgroundColor: scroll.y > 0 && "rgb(34, 184, 207, 0.5)",
+        backgroundColor: scroll.y > 0 && "rgb(186, 246, 239)",
         position: "fixed",
         zIndex: "12000",
         transition: !opened ? (scroll.y > 0 ? "2s" : "0.5s") : 0,
