@@ -5,6 +5,7 @@ import styles from "@/styles/Home.module.css";
 import {
   Avatar,
   Button,
+  Container,
   Divider,
   Grid,
   Indicator,
@@ -17,9 +18,15 @@ import Link from "next/link";
 import BsArrowRight from "react-icons/bs";
 import { Carousel } from "@mantine/carousel";
 import {SiTesla} from "react-icons/si";
+import { useViewportSize } from "@mantine/hooks";
+import useDevice from "@/Components/hooks/useDevice";
+import OurTesla from "@/Components/Index/OurTesla";
+import OurCustomers from "@/Components/Index/OurCustomers";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { height, width } = useViewportSize();
+  const device = useDevice(width);
   const theme = useMantineTheme();
   let cardContents = [
     {
@@ -124,7 +131,7 @@ export default function Home() {
         }}
       >
         <div
-          style={{
+          style={device !== "l" ? {
             width: "180vw",
             height: "180vw",
             minWidth: "200vw",
@@ -141,7 +148,27 @@ export default function Home() {
             display: "flex",
             flexDirection: "column",
             gap: "2vh",
-          }}
+          } : 
+          
+          {
+            width: "90vw",
+            height: "90vw",
+            minWidth: "120vw",
+            minHeight: "100vw",
+            borderRadius: "50%",
+            backgroundImage: `url("/images/black_tesla.jpg")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            position: "relative",
+            left: "-20.5vw",
+            top: "-50.5vw",
+            paddingLeft: "35vw",
+            paddingTop: "60.5vw",
+            display: "flex",
+            flexDirection: "column",
+            gap: "2vh",
+          }
+          }
         >
           <Title
             order={1}
@@ -231,9 +258,10 @@ export default function Home() {
             kam potřebujete, nebo vás rádi odvezeme
           </Text>
         </div>
-        <div>
+        <div style={device !== "l" ? {} : {display: "flex"}}>
           {cardContents.map((card) => {
-            return (
+            if(device !== "l"){
+              return (
               <Link href={card.link}>
                 <div
                   style={{
@@ -278,6 +306,60 @@ export default function Home() {
                 </div>
               </Link>
             );
+
+            }
+            else{
+              return (
+              <Link href={card.link} style={{width: "25%"}}>
+                <Container
+                  sx={{
+                    background:
+                      "url(" + card.image + ") lightgray 50% / cover no-repeat",
+                    height: "50vh",
+                    minHeight: "200px",
+                    backdropFilter: "saturate(0)",
+                    padding: "3vh 2vw",
+                    display: "flex",
+                    flexDirection: "column",
+                    transition: "all 0.5s ease-in-out",
+                    ":hover": {
+                    backgroundPosition: card.name == "Zážitkové jízdy" ? "right" : "50% 100%",
+                    
+                    }
+                  }}
+                >
+                  <Title
+                    order={3}
+                    sx={{
+                      fontSize: "2.5rem",
+                      color: theme.colors.neutral[0],
+                      fontWeight: "600",
+                    }}
+                  >
+                    {card.name}
+                  </Title>
+                  <Text
+                    sx={{
+                      color: theme.colors.neutral[0],
+                      maxWidth: "70%",
+                      marginTop: "auto",
+                    }}
+                  >
+                    {card.description}
+                  </Text>
+                  <Divider
+                    sx={{
+                      marginTop: "3vh",
+                      width: "20vw",
+                      filter: "saturate(1)",
+                    }}
+                    size={"xl"}
+                    color={card.color}
+                  />
+                </Container>
+              </Link>
+            );
+            }
           })}
         </div>
         <Link href={"/sluzby"}>
@@ -289,188 +371,16 @@ export default function Home() {
               color: theme.colors.neutral[7],
               fontWeight: "700",
               fontSize: "1.1rem",
+              marginLeft: device !== "l" ? "" : "8.5vw",
             }}
           >
             Všechny naše služby
           </Button>
         </Link>
       </section>
-      <section
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "4vh",
-          alignItems: "flex-start",
-        }}
-      >
-        <div
-          style={{
-            padding: "5vh 10vw",
-            display: "flex",
-            flexDirection: "column",
-            gap: "5vh",
-            alignItems: "flex-start",
-          }}
-        >
-          <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-            Naše Tesla
-          </Title>
-          <div
-            style={{ position: "relative", width: "80vw", minHeight: "25vh" }}
-          >
-            <Image
-              src={"/images/ourTesla.png"}
-              layout={"fill"}
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-          <Grid sx={{ width: "100%" }}>
-            <Grid.Col
-              span={4}
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
-                322
-              </Text>
-              <Text size={"1rem"} align="center" sx={{}}>
-                km/h
-              </Text>
-            </Grid.Col>
-            <Grid.Col
-              span={4}
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
-                634
-              </Text>
-              <Text size={"1rem"} align="center" sx={{}}>
-                km dojezd
-              </Text>
-            </Grid.Col>
-            <Grid.Col
-              span={4}
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
-                3,2
-              </Text>
-              <Text size={"1rem"} align="center" sx={{}}>
-                s 0-100
-              </Text>
-            </Grid.Col>
-          </Grid>
-          <Text>
-            Konstrukce vozu Model S umožňuje vynikající rychlost a dojezd s
-            úchvatným zrychlením a může se chlubit bezkonkurenčním výkonem a
-            vytříbeným designem.
-          </Text>
-        </div>
-        <Carousel loop withIndicators sx={{ width: "100%", height: "90vh" }}>
-          {slides.map((slide, index) => {
-            return (
-              <Carousel.Slide
-                sx={{
-                  backgroundColor: slide.color,
-                  width: "100%",
-                  height: "90vh",
-                  padding: "5vh 8vw",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div>
-                  <div>
-                    {" "}
-                    <Text size="0.9rem" weight={700}>
-                      {index + 1} /
-                    </Text>
-                    <Title size={"1.8rem"} order={3}>
-                      {slide.name}
-                    </Title>
-                  </div>
-                  <Text
-                    sx={{ fontFamily: theme.other.fira_code, marginTop: "3vh" }}
-                  >
-                    {slide.description}
-                  </Text>
-                </div>
-                <div
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    height: "40vh",
-                  }}
-                >
-                  <Image
-                    src={slide.img}
-                    layout={"fill"}
-                    style={{ objectFit: "contain" }}
-                  />
-                </div>
-              </Carousel.Slide>
-            );
-          })}
-        </Carousel>
-        <Link href={"/sluzby"}>
-          <Button
-            size="lg"
-            rightIcon="->"
-            variant="white"
-            sx={{
-              color: theme.colors.neutral[7],
-              fontWeight: "700",
-              fontSize: "1.1rem",
-              marginBottom: "4vh",
-            }}
-          >
-            Více o pronájmu
-          </Button>
-        </Link>
-      </section>
-      <section
-        style={{
-          padding: "5vh 10vw",
-          display: "flex",
-          flexDirection: "column",
-          gap: "4vh",
-        }}
-      >
-        <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-          Naši zákazníci
-        </Title>
-        <Text sx={{fontFamily: theme.other.fira_code}}>
-          Moc milý a ochotný pan, který i přes naše drobný problémy se choval
-          moc hezky, vše vysvětlil, zodpověděl, ukázal a sladil dle našich
-          přání. A i dost nad naše očekávání. Takže po 20 minutách mi přišlo jak
-          když jsme přišli i s ním. Odpovídal i na otázky ze soukromí, na které
-          nemusel. Moc jsme si to užili. Takže pro všechny kdo se rozhodují –
-          jděte do toho!!!
-        </Text>
-        <div style={{display: "flex", gap: "6vw"}}>
-          <Avatar size={"lg"} radius={""} color="red"><SiTesla /></Avatar>
-          <div style={{display: "flex", flexDirection: "column", justifyContent: "space-around"}}>
-            <Text weight={700}>Alena Špačková</Text>
-            <Text weight={400}>zážitková jízda na okruhu</Text>
-          </div>
-        </div>
-       
-      </section>
-      <Link href={"/o-nas"}>
-          <Button
-            size="lg"
-            rightIcon="->"
-            variant="white"
-            sx={{
-              color: theme.colors.neutral[7],
-              fontWeight: "700",
-              fontSize: "1.1rem",
-              marginBottom: "4vh",
-            }}
-          >
-            Chci zážitek jako Alena
-          </Button>
-        </Link>
+      <OurTesla slides={slides} />
+    <OurCustomers  />
+   
         <section
          style={{
           padding: "5vh 0 5vh 10vw",

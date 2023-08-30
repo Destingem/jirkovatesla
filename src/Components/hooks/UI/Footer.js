@@ -85,7 +85,7 @@ export default function Footer() {
       return (
         <footer style={{minHeight: "max-content", height: "65vh", display: "flex", flexDirection: "column"}}>
         <div style={{backgroundColor: theme.colors.cyan[1], padding: "3vh 0"}}>
-        <div style={{display: "flex", alignItems: "center", justifyContent: "left" ,padding: "0 5vw 2vh 5vw", gap: "4vw"}}>
+        <div style={{display: "flex", alignItems: "center", justifyContent: "left" ,padding: "0 5vw 2vh 5vw", gap: device !== "l" ? "4vw" : "1vw"}}>
               <Image src={Logo} width={50} height={50} style={{}} />
                   <div>
                     <Text size={"2rem"} color={theme.colors.neutral[7]} weight={500} sx={{fontFamily: theme.other.chivo}}>
@@ -94,7 +94,7 @@ export default function Footer() {
                   </div>
                
             </div>
-            <Text sx={{padding : "0 8vw"}}>Váš poskytovatel jízních zážitků a služeb v Brně</Text>
+            <Text sx={{padding : device !== "l" ? "0 8vw" : "0 5.5vw"}}>Váš poskytovatel jízních zážitků a služeb v Brně</Text>
         </div>
          <div style={{display: "flex", padding: "0 0 0 5vw"}}>
          <div size={"xl"} style={{maxWidth: "50%" ,backgroundColor: theme.colors.neutral[0],padding: "2vh 0", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "end", minHeight: "fit-content", gap: "2vh"}}>
@@ -104,7 +104,7 @@ export default function Footer() {
           </div>
 
          </div>
-          <div style={device !== "l" ? {display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%", padding: "0 5vw"} : {display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%", padding: "0 5vw"} }>
+          <div style={device !== "l" ? {display: "flex", justifyContent: "space-between", alignItems: "center", height: "100%", padding: "0 5vw"} : {display: "flex", justifyContent: "left", alignItems: "center", height: "100%", padding: "0 5vw", gap: "5vw"} }>
            <Link href={"https://jirkova-tesla.reservio.com/"}> <Text>Reservio</Text></Link>
            <Link href={"https://instagram.com/"}> <Text>Instagram</Text></Link>
           </div>

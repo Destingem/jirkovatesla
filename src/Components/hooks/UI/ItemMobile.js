@@ -6,10 +6,28 @@ export default function ItemMobile(props) {
     const theme = useMantineTheme();
     let {items} = props;
     const [showedSublinks, setShowedSublinks] = useState(false);
+    let textSize = "2.5rem";
+    if (props.height > 540) {
+        textSize = "2.5rem";
+    } 
+     else if (props.height > 590) {
+      textSize = "2.5rem";
+  } else if (props.height > 590) {
+      textSize = "2.2rem";
+  } else if (props.height > 460) {
+      textSize = "1.9rem";
+  } else if (props.height > 420) {
+      textSize = "1.6rem";
+  } else if (props.height > 300) {
+      textSize = "1.3rem";
+  } else{
+    textSize = "1.1rem";
+  }
+  
     return(
         <Paper>
               <Link href={items ? "#" : props.href} style={{display: "flex", alignItems: "end", gap: "2vw"}}>
-                <Text size={"2.5rem"} align="left" sx={{ fontWeight: 600 ,lineHeight: "125%",color: theme.colors.neutral[7], fontFamily: theme.other.chivo,}}>
+                <Text size={textSize} align="left" sx={{ fontWeight: 600 ,lineHeight: "125%",color: theme.colors.neutral[7], fontFamily: theme.other.chivo,}}>
                   {props.label}
                 </Text>
                 <div onClick={()=> {setShowedSublinks(prev => {return !prev})}}>
