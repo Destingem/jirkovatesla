@@ -24,10 +24,10 @@ import useDevice from "../useDevice";
 
 const itemsSluzby = [
   { href: "/sluzby", label: "Všechny služby" },
-  { href: "/zazitkove-jizdy", label: "Zážitkové jízdy" },
-  { href: "/pronajem", label: "Pronájem" },
-  { href: "/taxi", label: "Taxi a rozvoz" },
-  { href: "/akce", label: "Akce" },
+  { href: "/sluzby/zazitkove-jizdy", label: "Zážitkové jízdy" },
+  { href: "/sluzby/pronajem", label: "Pronájem" },
+  { href: "/sluzby/taxi", label: "Taxi a rozvoz" },
+  { href: "/sluzby/akce", label: "Akce" },
 ];
 
 const menuItems = [

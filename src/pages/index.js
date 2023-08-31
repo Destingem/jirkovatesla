@@ -37,28 +37,28 @@ export default function Home() {
       description: "Zažijte maximální rychlost až 290 kilometrů za hodinu",
       image: "/images/zazitkove_jizdyb.jpg",
       color: theme.colors.primary[4],
-      link: "/zazitkove-jizdy",
+      link: "/sluzby/zazitkove-jizdy",
     },
     {
       name: "Pronájem",
       description: "Užívejte si komfortu při cestování s nabíjením zdarma",
       image: "/images/pronajemb.jpg",
       color: "#71E4D3",
-      link: "/pronajem",
+      link: "/sluzby/pronajem",
     },
     {
       name: "Taxi",
       description: "Spolehněte se na klidný a bezpečný odvoz",
       image: "/images/taxib.jpg",
       color: "#E1E471",
-      link: "/taxi",
+      link: "/sluzby/taxi",
     },
     {
       name: "Akce",
       description: "Reprezentujte se s prémiovým vozem Tesla S.",
       image: "/images/akce.avif",
       color: "#8171E4",
-      link: "/akce",
+      link: "/sluzby/akce",
     },
   ];
   let slides = [
@@ -132,6 +132,7 @@ export default function Home() {
           alignItems: "center",
           flexDirection: "column",
           maxHeight: "700px",
+          marginBottom: "10vh",
         }}
       >
         <div
@@ -189,19 +190,46 @@ export default function Home() {
             Zajištujeme vaše zážitky, ať už to je jízda na okruhu, pracovní
             cesta, či společenská uzdálost. Jsme tu pro vás
           </Text>
-        </div>
-        <Link href={"/"} style={{ marginTop: "-150px" }}>
+          {device == "l" && <div style={{ marginLeft: "auto", marginRight: "2vw", marginTop: "5vh", display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "2vh" }}>
+          <Link href={"/rezervace"}>
           {" "}
           <Button
             rightIcon={"->"}
             size="xl"
-            sx={{ fontSize: "1rem", width: "90vw" }}
+            variant="outline"
+            sx={{ fontSize: "1rem", width: device !== "l" ? "90vw" : "20vw",   }}
+            radius={60}
+            color={"dark"}
+          >
+            Rezervace
+          </Button>
+        </Link>
+          <Link href={"/sluzby"}>
+          {" "}
+          <Button
+            rightIcon={"->"}
+            size="xl"
+            sx={{ fontSize: "1rem", width: device !== "l" ? "90vw" : "30vw", maxWidth: "600px"   }}
             radius={60}
             color={"dark"}
           >
             Naše nabídka
           </Button>
         </Link>
+          </div>}
+        </div>
+        {device !== "l" && <Link href={"/"} style={{ marginTop: device !== "l" ? "-150px" : "-150vh" }}>
+          {" "}
+          <Button
+            rightIcon={"->"}
+            size="xl"
+            sx={{ fontSize: "1rem", width: device !== "l" ? "90vw" : "30vw",  }}
+            radius={60}
+            color={"dark"}
+          >
+            Naše nabídka
+          </Button>
+        </Link>}
       </section>
 
       <section
@@ -262,7 +290,7 @@ export default function Home() {
             kam potřebujete, nebo vás rádi odvezeme
           </Text>
         </div>
-        <div style={device !== "l" ? {} : {display: "flex"}}>
+        <div style={device !== "l" ? {} : {display: "flex", width: "100%"}}>
           {cardContents.map((card) => {
             if(device !== "l"){
               return (
@@ -387,7 +415,7 @@ export default function Home() {
    
         <section
          style={{
-          padding: "5vh 0 5vh 10vw",
+          padding: device == "m" ? "5vh 0 5vh 10vw" : "5vh 10vw 5vh 10vw",
           display: "flex",
           flexDirection: "column",
           gap: "4vh",
@@ -396,25 +424,36 @@ export default function Home() {
         <Title weight={600} order={2} size={"2.3rem"} style={{}}>
           Blog
         </Title>
-        <Grid sx={{ width: "100%" }}>
+        <Grid gutter={device == "m" ? "" : "xl"} sx={{ width: "100%" }}>
      {blogPosts.map((post, index)=> {
 let {heading, date, text, href, color} = post
+let cardSpan = 12;
+let cardPadding = "4vh 10vw"
+if(device == "l"){
+  cardSpan = 4;
+  cardPadding = "4vh 2vw"
+} else if(device == "t"){
+  cardSpan = 6;
+  cardPadding = "4vh 3vw"
+}
 function hexToRGBA(hex, opacity = 1) {
   const [r, g, b] = hex.match(/\w\w/g).map((xx) => parseInt(xx, 16));
   return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
       return(
         <Grid.Col
-  span={12}
+  span={cardSpan}
   sx={{
     position: "relative",
     display: "flex",
     flexDirection: "column",
     alignItems: "left",
     justifyContent: "center",
-    padding: "4vh 10vw",
+    padding: cardPadding,
     marginBottom: "2vh",
     backgroundColor: hexToRGBA(color, 0.5),
+    border: device == "m" ? "none" : "1vw solid #fff",
+  
     
     '::before': {
       content: '""',
@@ -447,6 +486,10 @@ function hexToRGBA(hex, opacity = 1) {
               paddingLeft: "0",
               backgroundColor: "transparent",
               marginBottom: "0",
+              transition: "all 0.3s ease-in-out",
+              ":hover": {
+                color: theme.colors.primary[7],
+              }
             }}
           >
             Číst dále
@@ -473,7 +516,7 @@ function hexToRGBA(hex, opacity = 1) {
           </Button>
         </Link>
         </section>
-        <section
+   {device !== "l" &&      <section
         style={{
           padding: "5vh 10vw",
           display: "flex",
@@ -509,7 +552,7 @@ function hexToRGBA(hex, opacity = 1) {
 </svg>
 <Text size={"xl"} weight={600}>Kontakt</Text>
         </Link>
-        </section>
+        </section>}
     </>
   );
 }
