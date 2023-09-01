@@ -3,7 +3,9 @@ import OfferCard from "@/Components/Rezervace/OfferCard";
 import Sluzba from "@/Components/Rezervace/Sluzba";
 import { parseTime } from "@/Components/Rezervace/helpers";
 import PageHero from "@/Components/hooks/UI/PageHero";
+import useDevice from "@/Components/hooks/useDevice";
 import { Avatar, Button, Card, Grid, Image, Rating, Select, Text, Title, useMantineTheme } from "@mantine/core";
+import { useViewportSize } from "@mantine/hooks";
 import { useState } from "react";
 import { useReducer } from "react";
 import {AiFillFilter} from "react-icons/ai"
@@ -232,11 +234,12 @@ export default function Rezervace() {
   const theme = useMantineTheme();
   const [openedModal, setOpenedModal] = useState(false);
   const [filteredOffers, setFilteredOffers] =   useReducer(filterReducer, {nabidky, filters: {}, sort: "doporucene"})
-
+  const { height, width } = useViewportSize();
+  const device = useDevice(width);
   return (
     
   <>
-   <FilterModal data={nabidky} opened={openedModal} setOpened={setOpenedModal} setFilteredOffers={setFilteredOffers} />
+ <FilterModal data={nabidky} opened={openedModal} setOpened={setOpenedModal} setFilteredOffers={setFilteredOffers} />
       <div style={{ marginTop: "0vh" }}>
     
     <PageHero heading={"Rezervace"}>
@@ -271,10 +274,17 @@ export default function Rezervace() {
 />
 
       </div>
+   {device !== "m" ? 
+   <Grid sx={{margin: "2vh 5vw"}} align="flex-end" gutter={"xl"}>
+    {filteredOffers.nabidky.map((nabidka)=> {return <Grid.Col span={3} sx={{marginBottom: "2vh"}}> <OfferCard {...nabidka} /> </Grid.Col> })}
+    {filteredOffers.nabidky.length === 0 && <Text size={"1.5rem"} weight={700} color={theme.colors.neutral[6]} align="center">Žádné nabídky neodpovídají zadaným filtrům</Text>}
+   </Grid>
+     : 
      <div style={{display: "flex", flexDirection: "column", gap: "2vh", padding: "2vh 5vw"}}>
     {filteredOffers.nabidky.map((nabidka)=> {return <OfferCard {...nabidka} /> })}
     {filteredOffers.nabidky.length === 0 && <Text size={"1.5rem"} weight={700} color={theme.colors.neutral[6]} align="center">Žádné nabídky neodpovídají zadaným filtrům</Text>}
      </div>
+     }
   </div>
   </div>
   </>

@@ -3,9 +3,13 @@ import { Carousel } from "@mantine/carousel";
 import { Avatar, Button, Image, Text, Title, useMantineTheme } from "@mantine/core";
 import Link from "next/link";
 import { SiTesla } from "react-icons/si";
+import Autoplay from 'embla-carousel-autoplay';
+import { useRef } from "react";
+import Tesla from "@/Components/Onas/Tesla";
 export default function Onas(){
 
     const theme = useMantineTheme();
+    const autoplay = useRef(Autoplay({ delay: 2000 }));
     let slides = [
         {
           name: "Nabíjení zdarma",
@@ -75,6 +79,7 @@ export default function Onas(){
         text: "Nedělejte si starosti s provozem. Díky rozrůstající se síti nabíjecích stanic Tesla Supercharger se nemusíte bát o nabíjení v Česku, ani okolních státech, kde je sít ještě rozšířenější.",
     }
 ]
+
     return(
         <div style={{marginTop: "0vh"}}>
             
@@ -155,75 +160,8 @@ export default function Onas(){
        }) }
         </div>
         </section>
-        <section  style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "4vh",
-          alignItems: "flex-start",
-        }}>
-        <Carousel loop withIndicators sx={{ width: "100%", height: "90vh" }}>
-          {slides.map((slide, index) => {
-            return (
-              <Carousel.Slide
-                sx={{
-                  backgroundColor: slide.color,
-                  width: "100%",
-                  height: "90vh",
-                  padding: "5vh 8vw",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div>
-                  <div>
-                    {" "}
-                    <Text size="0.9rem" weight={700}>
-                      {index + 1} /
-                    </Text>
-                    <Title size={"1.8rem"} order={3}>
-                      {slide.name}
-                    </Title>
-                  </div>
-                  <Text
-                    sx={{ fontFamily: theme.other.fira_code, marginTop: "3vh" }}
-                  >
-                    {slide.description}
-                  </Text>
-                </div>
-                <div
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    height: "40vh",
-                  }}
-                >
-                  <Image
-                    src={slide.img}
-                    layout={"fill"}
-                    style={{ objectFit: "contain" }}
-                  />
-                </div>
-              </Carousel.Slide>
-            );
-          })}
-        </Carousel>
-        <Link href={"/sluzby"}>
-          <Button
-            size="lg"
-            rightIcon="->"
-            variant="white"
-            sx={{
-              color: theme.colors.neutral[7],
-              fontWeight: "700",
-              fontSize: "1.1rem",
-              marginBottom: "4vh",
-            }}
-          >
-            Více o pronájmu
-          </Button>
-        </Link>
-        </section>
+      <Tesla slides={slides}/>
+      
         </div>
     )
 }

@@ -1,11 +1,19 @@
 import React from 'react';
 
-export default function OurMap() {
-    const containerStyle = {
+export default function OurMap({laptop}) {
+    const containerStyle = !laptop ?{
         position: 'relative',
         width: '100%',
         paddingBottom: '120%',  // Aspect ratio: (height / width) * 100 = (400 / 520) * 100 = 76.92%
-        overflow: 'hidden'
+        overflow: 'hidden',
+        maxWidth: "100%",
+    } :   {
+        position: 'relative',
+        width: '100%',
+        // Aspect ratio: (height / width) * 100 = (400 / 520) * 100 = 76.92%
+        overflow: 'hidden',
+        height: "100%",
+        minWidth: "100%"
     };
 
     const iframeStyle = {
@@ -30,6 +38,7 @@ export default function OurMap() {
 
     return (
         <div style={containerStyle}>
+        
             <iframe 
                 style={iframeStyle}
                 frameborder="0" 

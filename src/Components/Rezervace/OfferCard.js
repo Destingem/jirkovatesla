@@ -1,6 +1,10 @@
 import { Button, Card, Grid, Image, Text, Title, useMantineTheme } from "@mantine/core";
+import useDevice from "../hooks/useDevice";
+import { useViewportSize } from "@mantine/hooks";
 
 export default function OfferCard({imgSrc, name, rating, time, place, driver, desc, btnLabel, price}){
+  const { height, width } = useViewportSize();
+  const device = useDevice(width);
   const theme = useMantineTheme()
     return(
         <Card shadow="sm">

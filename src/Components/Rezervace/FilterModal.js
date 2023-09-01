@@ -84,7 +84,7 @@ function handleSubmit(values){
     setFilteredOffers({filters: values})
 }
     return(
-        <Modal zIndex={3500} size={"xl"} yOffset={"15vh"} opened={opened} closeButtonProps={{size: "xl"}} onClose={()=>{setOpened(false)}}  title="Filtrovat balíčky" sx={{height: "100vh", backgroundColor: "#fff", width: "80vw",}}>
+        <Modal zIndex={3500} size={"xl"} yOffset={"15vh"} opened={opened} closeButtonProps={{size: "xl"}} onClose={()=>{setOpened(false)}}  title="Filtrovat balíčky" sx={{ backgroundColor: "#fff", width: "80vw",}}>
        <form onSubmit={form.onSubmit(handleSubmit)}>
        <div style={{display: "flex", flexDirection: "column", gap: "2vh"}}>
         <div>

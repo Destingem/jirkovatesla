@@ -82,7 +82,7 @@ export default function Sluzby() {
             )
         })}
         <Link href={"/sluzby/zazitkove-jizdy"} style={{width: "100%"}}>
-        <Button color="red" rightIcon={"->"} size="xl" sx={{fontSize: "1rem", backgroundColor: theme.colors.primary[9], width: "100%"}}>Vyberte si svou jízdu</Button>
+        <Button color="red" rightIcon={"->"} size="xl" sx={{fontSize: "1rem", backgroundColor: theme.colors.primary[9], width: "20%", borderRadius: "60px", marginTop: "5vh"}}>Vyberte si svou jízdu</Button>
         </Link>
         </div>
 

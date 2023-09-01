@@ -7,7 +7,7 @@ import useDevice from "../hooks/useDevice";
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from "react";
 
-export default function OurTesla({slides}){
+export default function Tesla({slides}){
     const theme = useMantineTheme()
     const { height, width } = useViewportSize();
     const device = useDevice(width);
@@ -218,7 +218,7 @@ export default function OurTesla({slides}){
           </Grid>
         </div>
       <div style={{padding: "5vh 5vw", display: "flex", flexDirection: "column", alignItems: "end", justifyContent: "space-between", height: "100%"}}>
-      <Text sx={{lineHeight: "175%"}}>
+      <Text>
             Konstrukce vozu Model S umožňuje vynikající rychlost a dojezd s
             úchvatným zrychlením a může se chlubit bezkonkurenčním výkonem a
             vytříbeným designem.
