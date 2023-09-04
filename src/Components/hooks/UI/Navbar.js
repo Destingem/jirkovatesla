@@ -9,12 +9,15 @@ import {
   UnstyledButton,
   Button,
   Menu,
+  ActionIcon,
+  Indicator,
 } from "@mantine/core";
 import Link from "next/link";
 import { useViewportSize, useWindowScroll } from "@mantine/hooks";
 import Image from "next/image";
 import Logo from "../../../../public/images/JirkaLogo.png";
 import NavBarMobile from "./NavbarMobile";
+import { BsFillCartFill } from "react-icons/bs";
 import { useRouter } from "next/router";
 export default function Navbar({motion}) {
   var theme = useMantineTheme();
@@ -120,6 +123,7 @@ export default function Navbar({motion}) {
   console.log(router);
   let textColor = "#ffffff"
   let backgroundColor = theme.colors.cyan[1]
+  let cardColor = "light"
   switch (router.pathname) {
     case "/":
       textColor = "#ffffff"
@@ -139,19 +143,19 @@ export default function Navbar({motion}) {
     case "/kontakt":
       textColor = "#000"
       break;
-    case "/zazitkove-jizdy":
+    case "/sluzby/zazitkove-jizdy":
       textColor = theme.colors.primary[8]
       backgroundColor = "#f3c7c6"
       break;
-    case "/pronajem":
+    case "/sluzby/pronajem":
       textColor = theme.colors.teal[9]
       backgroundColor = "#c7f3c7"
       break;
-    case "/taxi":
+    case "/sluzby/taxi":
       textColor = theme.colors.yellow[9]
       backgroundColor = "#f2eec6"
       break;
-    case "/akce":
+    case "/sluzby/akce":
       textColor = theme.colors.grape[9]
       backgroundColor = "#dec7f2"
       break;
@@ -174,9 +178,9 @@ export default function Navbar({motion}) {
             : { borderBottom: "" }
         }
       >
-        <div style={{ width: "80%", zIndex: "1850" }}>
+        <div style={{ width: "95%", zIndex: "1850", paddingLeft: "10%", paddingBottom: "1vh" }}>
           <Grid gutter="lg" w={"100%"}>
-            <Grid.Col span={6}>
+            <Grid.Col span={5}>
               <Link href={"/"} className={classes.logoContainer}>
                 <Image src={Logo} width={50} height={50} style={{}} />
                 <div>
@@ -188,7 +192,7 @@ export default function Navbar({motion}) {
               </Link>
             </Grid.Col>
             <Grid.Col
-              span={6}
+              span={5}
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -231,6 +235,21 @@ export default function Navbar({motion}) {
                   }
                 })}
               </div>
+            </Grid.Col>
+            <Grid.Col span={2} sx={{display: "flex", alignItems: "center", justifyContent: "flex-end"}}>
+            <Link href={"/rezervace"} style={{ textAlign: "center" }} >
+          {" "}
+          <Button
+            rightIcon={"->"}
+            size="xl"
+            
+            sx={{ fontSize: "1rem", minWidth: "25vh", width: "100%"}}
+            radius={60}
+            color={"dark"}
+          >
+            Rezervovat jízdu
+          </Button>
+        </Link>
             </Grid.Col>
           </Grid>
         </div>

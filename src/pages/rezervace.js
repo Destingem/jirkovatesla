@@ -9,6 +9,7 @@ import { useViewportSize } from "@mantine/hooks";
 import { useState } from "react";
 import { useReducer } from "react";
 import {AiFillFilter} from "react-icons/ai"
+import Cal from "@calcom/embed-react";
 let nabidky = [
     {
         name: "Starter",
@@ -248,44 +249,18 @@ export default function Rezervace() {
       Chceme tento zážitek poskytnout i vám a proto vám nabízíme naše služby
       na vaší cestě.
     </PageHero>
-  <Sluzba productChoices={productChoices} />
-  <div>
-  <Title
-        weight={600}
-        order={2}
-        size={"2.3rem"}
-        style={{ padding: "5vh 5vw" }}
-      >
-        Doporučené balíčky
-      </Title>
-      <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", padding: "2vh 5vw"}}>
-      <Avatar onClick={()=> {setOpenedModal(true)}} color="red"><AiFillFilter size={"1rem"} color={theme.colors.primary[8]} /></Avatar>
-     
-      <Select
-  sx={{width: "50%", minWidth: "150px"}}
-  placeholder="seřadit dle"
-  data={[
-    { value: 'doporucene', label: 'Doporučené' },
-    { value: 'bestRated', label: 'Nejlépe hodnocené' },
-    { value: 'cheapest', label: 'Nejlevnější' },
-    { value: 'expensive', label: 'Nejdražší' },
-  ]}
-  onChange={(value)=> {setFilteredOffers({filters: filteredOffers.filters, sort: value, type: "sort"})}}
-/>
-
-      </div>
-   {device !== "m" ? 
-   <Grid sx={{margin: "2vh 5vw"}} align="flex-end" gutter={"xl"}>
-    {filteredOffers.nabidky.map((nabidka)=> {return <Grid.Col span={3} sx={{marginBottom: "2vh"}}> <OfferCard {...nabidka} /> </Grid.Col> })}
-    {filteredOffers.nabidky.length === 0 && <Text size={"1.5rem"} weight={700} color={theme.colors.neutral[6]} align="center">Žádné nabídky neodpovídají zadaným filtrům</Text>}
-   </Grid>
-     : 
-     <div style={{display: "flex", flexDirection: "column", gap: "2vh", padding: "2vh 5vw"}}>
-    {filteredOffers.nabidky.map((nabidka)=> {return <OfferCard {...nabidka} /> })}
-    {filteredOffers.nabidky.length === 0 && <Text size={"1.5rem"} weight={700} color={theme.colors.neutral[6]} align="center">Žádné nabídky neodpovídají zadaným filtrům</Text>}
-     </div>
-     }
-  </div>
+    <Cal
+    style={{width: "100%", height: "100%", margin: "5vh 0"}}
+    calLink="jirkovatesla"
+    config={{
+      
+      name: "Vaše jméno",
+      email: "Váš email",
+      notes: "",
+      guests: [],
+      theme: "light",
+    }}
+  />
   </div>
   </>
   );
