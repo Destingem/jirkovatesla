@@ -24,7 +24,7 @@ export default function HeroDesktop() {
   useEffect(() => {
       // Přepočítáme opacity na základě videoWidth
       // Začneme s hodnotou 1 a snížíme ji na 0, jak se videoWidth zvyšuje k 80
-      const calculatedOpacity = 1 - ((videoWidth - 20.5) / 79.5); 
+      const calculatedOpacity = 1 - ((videoWidth - 45) / 55); 
       setOpacity(Math.max(calculatedOpacity, 0));
   }, [videoWidth]);
   const dragRef = useRef(null);
