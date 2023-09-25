@@ -10,8 +10,9 @@ export default function PageHero({heading, children, color}) {
   return (
     <Container
       sx={{
-        width: "100%",
+        width: device !== "l" ? "100vw" : "50vw",
         height: "60vh",
+        borderRadius: "0 0 25px 25px",
         minHeight: "450px",
         maxHeight: "800px",
         margin: "0",

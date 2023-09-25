@@ -3,6 +3,7 @@ import { useViewportSize } from "@mantine/hooks";
 import useDevice from "../hooks/useDevice";
 import { SiTesla } from "react-icons/si";
 import Link from "next/link";
+import SubTitle from "../hooks/UI/SubTitle";
 export default function OurCustomers(){
     const theme = useMantineTheme()
     const { height, width } = useViewportSize();
@@ -17,9 +18,7 @@ export default function OurCustomers(){
           gap: "4vh",
         }}
       >
-        <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-          Naši zákazníci
-        </Title>
+          <SubTitle href={"/o-nas"} device={device} label={"HODNOCENÍ"}>Naši zákazníci</SubTitle>
         <Text sx={{fontFamily: theme.other.fira_code}}>
           Moc milý a ochotný pan, který i přes naše drobný problémy se choval
           moc hezky, vše vysvětlil, zodpověděl, ukázal a sladil dle našich

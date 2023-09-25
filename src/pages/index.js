@@ -3,8 +3,10 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import {
+  ActionIcon,
   Avatar,
   Button,
+  Card,
   Container,
   Divider,
   Grid,
@@ -15,7 +17,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import Link from "next/link";
-import BsArrowRight from "react-icons/bs";
+import BsArrowRight, { BsArrowUpRight } from "react-icons/bs";
 import { Carousel } from "@mantine/carousel";
 import {SiTesla} from "react-icons/si";
 import { useViewportSize } from "@mantine/hooks";
@@ -23,6 +25,9 @@ import useDevice from "@/Components/hooks/useDevice";
 import OurTesla from "@/Components/Index/OurTesla";
 import OurCustomers from "@/Components/Index/OurCustomers";
 import { useRouter } from "next/router";
+import SubTitle from "@/Components/hooks/UI/SubTitle";
+import HeroMobile from "@/Components/Index/HeroMobile";
+import HeroDesktop from "@/Components/Index/HeroDesktop";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -123,114 +128,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section
-        style={{
-          height: "100vh",
-          width: "100vw",
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          flexDirection: "column",
-          maxHeight: "700px",
-          marginBottom: "10vh",
-        }}
-      >
-        <div
-          style={device !== "l" ? {
-            width: "180vw",
-            height: "180vw",
-            minWidth: "200vw",
-            minHeight: "200vw",
-            borderRadius: "50%",
-            backgroundImage: `url("/images/black_tesla.jpg")`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            position: "relative",
-            left: "-20.5vw",
-            top: "-50.5vw",
-            paddingLeft: "75vw",
-            paddingTop: "75.5vw",
-            display: "flex",
-            flexDirection: "column",
-            gap: "2vh",
-          } : 
-          
-          {
-            width: "90vw",
-            height: "90vw",
-            minWidth: "120vw",
-            minHeight: "100vw",
-            borderRadius: "50%",
-            backgroundImage: `url("/images/black_tesla.jpg")`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            position: "relative",
-            left: "-10.5vw",
-            top: "-60.5vw",
-            paddingLeft: "35vw",
-            paddingTop: "70.5vw",
-            display: "flex",
-            flexDirection: "column",
-            gap: "2vh",
-          }
-          }
-        >
-          <Title
-            order={1}
-            style={{ color: "#ffffff", zIndex: 1, fontSize: device !== "l" ? "3.5rem" : "4.5rem" }}
-          >
-            Vaše jízda, <br /> naše starost
-          </Title>
-          <Divider
-            sx={{ marginTop: device !== "l" ? "8vh" : "2vh", width: device !== "l" ? "50vw" : "30vw" }}
-            size={"xl"}
-            color={theme.colors.neutral[1]}
-          />
-          <Text color={theme.colors.neutral[2]} sx={{ maxWidth: device !== "l" ? "90vw" : "30%", marginTop: device !== "l" ? "" : "2vh" }}>
-            Zajištujeme vaše zážitky, ať už to je jízda na okruhu, pracovní
-            cesta, či společenská uzdálost. Jsme tu pro vás
-          </Text>
-          {device == "l" && <div style={{ marginLeft: "auto", marginRight: "2vw", marginTop: "5vh", display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "2vh" }}>
-          <Link href={"/rezervace"}>
-          {" "}
-          <Button
-            rightIcon={"->"}
-            size="xl"
-            variant="outline"
-            sx={{ fontSize: "1rem", width: device !== "l" ? "90vw" : "20vw",   }}
-            radius={60}
-            color={"dark"}
-          >
-            Rezervace
-          </Button>
-        </Link>
-          <Link href={"/sluzby"}>
-          {" "}
-          <Button
-            rightIcon={"->"}
-            size="xl"
-            sx={{ fontSize: "1rem", width: device !== "l" ? "90vw" : "30vw", maxWidth: "600px"   }}
-            radius={60}
-            color={"dark"}
-          >
-            Naše nabídka
-          </Button>
-        </Link>
-          </div>}
-        </div>
-        {device !== "l" && <Link href={"/"} style={{ marginTop: device !== "l" ? "-150px" : "-150vh" }}>
-          {" "}
-          <Button
-            rightIcon={"->"}
-            size="xl"
-            sx={{ fontSize: "1rem", width: device !== "l" ? "90vw" : "30vw",  }}
-            radius={60}
-            color={"dark"}
-          >
-            Naše nabídka
-          </Button>
-        </Link>}
-      </section>
+     
+      {device !== "l" ? <HeroMobile/> : <HeroDesktop />}
 
       <section
         style={{
@@ -241,9 +140,7 @@ export default function Home() {
           alignItems: "flex-start",
         }}
       >
-        <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-          Kdo jsme
-        </Title>
+        <SubTitle href={"/o-nas"} device={device} label={"O NÁS"}>Kdo jsme</SubTitle>
         <Text sx={{ fontSize: "1rem", lineHeight: "175%" }}>
           Jsme nadšenci do rychlých aut a inovací. Baví nás rychle jezdit na
           okruhu i si užívat klidné jízdy v příjemném interiéru luxusních aut.
@@ -282,15 +179,14 @@ export default function Home() {
             gap: "4vh",
           }}
         >
-          <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-            Naše služby
-          </Title>
+            <SubTitle href={"/sluzby"} device={device} label={"NAŠE SLUŽBY"}>Co nabízíme</SubTitle>
+           
           <Text sx={{ fontSize: "1rem", lineHeight: "175%" }}>
             Pronajímáme Teslu S se kterou se můžete projet na okruhu, zajet si
             kam potřebujete, nebo vás rádi odvezeme
           </Text>
         </div>
-        <div style={device !== "l" ? {} : {display: "flex", width: "100%"}}>
+        <div style={device !== "l" ? {} : {display: "flex", width: "100%", justifyContent: "space-between", padding: "0 7%"}}>
           {cardContents.map((card) => {
             if(device !== "l"){
               return (
@@ -342,15 +238,16 @@ export default function Home() {
             }
             else{
               return (
-              <Link href={card.link} style={{width: "25%"}}>
-                <Container
+              <Link href={card.link} style={{width: "24%", borderRadius: "12px" }}>
+                <Card
                   sx={{
+                    borderRadius: "12px",
                     background:
                       "url(" + card.image + ") lightgray 50% / cover no-repeat",
-                    height: "50vh",
+                    height: "40vh",
                     minHeight: "200px",
                     backdropFilter: "saturate(0)",
-                    padding: "3vh 2vw",
+                    padding: "",
                     display: "flex",
                     flexDirection: "column",
                     transition: "all 0.5s ease-in-out",
@@ -362,33 +259,31 @@ export default function Home() {
                 >
                   <Title
                     order={3}
+                    align="left"
                     sx={{
-                      fontSize: "2.5rem",
+                      fontSize: "3rem",
                       color: theme.colors.neutral[0],
                       fontWeight: "600",
+                      margin: "3vh 2vw"
                     }}
                   >
                     {card.name}
                   </Title>
+                  <Card.Section sx={{backgroundColor:  card.color, marginTop: "auto", padding: "2vh 1vw", display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: "25%"}}>
                   <Text
                     sx={{
                       color: theme.colors.neutral[0],
                       maxWidth: "70%",
-                      marginTop: "auto",
+                    
                     }}
                   >
                     {card.description}
                   </Text>
-                  <Divider
-                    sx={{
-                      marginTop: "3vh",
-                      width: "20vw",
-                      filter: "saturate(1)",
-                    }}
-                    size={"xl"}
-                    color={card.color}
-                  />
-                </Container>
+                  <Link href={card.link}><BsArrowUpRight fontWeight={700} fontSize={"2.5rem"} color="#fff" /></Link>
+                  </Card.Section>
+                
+               
+                </Card>
               </Link>
             );
             }
@@ -411,6 +306,7 @@ export default function Home() {
         </Link>
       </section>
       <OurTesla slides={slides} />
+   
     <OurCustomers  />
    
         <section
@@ -421,9 +317,7 @@ export default function Home() {
           gap: "4vh",
         }}
         >
-        <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-          Blog
-        </Title>
+         <SubTitle href={"/blog"} device={device} label={"BLOG"}>Nové příspěvky</SubTitle>
         <Grid gutter={device == "m" ? "" : "xl"} sx={{ width: "100%" }}>
      {blogPosts.map((post, index)=> {
 let {heading, date, text, href, color} = post
@@ -516,7 +410,8 @@ function hexToRGBA(hex, opacity = 1) {
           </Button>
         </Link>
         </section>
-   {device !== "l" &&      <section
+ 
+        {device !== "l" &&  <section
         style={{
           padding: "5vh 10vw",
           display: "flex",
@@ -524,35 +419,35 @@ function hexToRGBA(hex, opacity = 1) {
           gap: "4vh",
         }}
       >
-        <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-          Kam dále?
-        </Title>
-        <Link href={"/o-nas"}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="302" height="24" viewBox="0 0 302 24" fill="none">
-  <path d="M301.061 13.0607C301.646 12.4749 301.646 11.5251 301.061 10.9393L291.515 1.3934C290.929 0.807611 289.979 0.807611 289.393 1.3934C288.808 1.97919 288.808 2.92893 289.393 3.51472L297.879 12L289.393 20.4853C288.808 21.0711 288.808 22.0208 289.393 22.6066C289.979 23.1924 290.929 23.1924 291.515 22.6066L301.061 13.0607ZM0 13.5H300V10.5H0V13.5Z" fill="#CDE441"/>
+        <Link href={"/o-nas"} style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+        <SubTitle href={"/o-nas"} device={device} label={"VÍCE"}>O nás</SubTitle>
+        <svg xmlns="http://www.w3.org/2000/svg" width="122" height="23" viewBox="0 0 122 23" fill="none">
+  <path d="M121.061 12.5607C121.646 11.9749 121.646 11.0251 121.061 10.4393L111.515 0.893398C110.929 0.307612 109.979 0.307612 109.393 0.893398C108.808 1.47918 108.808 2.42893 109.393 3.01472L117.879 11.5L109.393 19.9853C108.808 20.5711 108.808 21.5208 109.393 22.1066C109.979 22.6924 110.929 22.6924 111.515 22.1066L121.061 12.5607ZM0 13H120V10H0V13Z" fill="#CDE441"/>
 </svg>
-<Text size={"xl"} weight={600}>O nás</Text>
-        </Link>
-        <Link href={"/sluzby"}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="242" height="23" viewBox="0 0 242 23" fill="none">
-  <path d="M241.061 12.3942C241.646 11.8084 241.646 10.8586 241.061 10.2728L231.515 0.726894C230.929 0.141108 229.979 0.141108 229.393 0.726894C228.808 1.31268 228.808 2.26243 229.393 2.84822L237.879 11.3335L229.393 19.8188C228.808 20.4046 228.808 21.3543 229.393 21.9401C229.979 22.5259 230.929 22.5259 231.515 21.9401L241.061 12.3942ZM0 12.8335H240V9.8335H0V12.8335Z" fill="#41E4CC"/>
-</svg>
-<Text size={"xl"} weight={600}>Služby</Text>
-        </Link>
-        <Link href={"/blog"}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="194" height="23" viewBox="0 0 194 23" fill="none">
-  <path d="M193.061 12.7272C193.646 12.1414 193.646 11.1916 193.061 10.6058L183.515 1.0599C182.929 0.474115 181.979 0.474115 181.393 1.0599C180.808 1.64569 180.808 2.59544 181.393 3.18122L189.879 11.6665L181.393 20.1518C180.808 20.7376 180.808 21.6873 181.393 22.2731C181.979 22.8589 182.929 22.8589 183.515 22.2731L193.061 12.7272ZM0 13.1665H192V10.1665H0V13.1665Z" fill="#41BDE4"/>
-</svg>
-<Text size={"xl"} weight={600}>Blog</Text>
 
         </Link>
-        <Link href={"/kontakt"}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="156" height="24" viewBox="0 0 156 24" fill="none">
-  <path d="M154.661 13.0607C155.246 12.4749 155.246 11.5251 154.661 10.9393L145.115 1.3934C144.529 0.807611 143.579 0.807611 142.993 1.3934C142.408 1.97919 142.408 2.92893 142.993 3.51472L151.479 12L142.993 20.4853C142.408 21.0711 142.408 22.0208 142.993 22.6066C143.579 23.1924 144.529 23.1924 145.115 22.6066L154.661 13.0607ZM0 13.5H153.6V10.5H0V13.5Z" fill="#4152E4"/>
+        <Link href={"/sluzby"} style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+        <SubTitle href={"/sluzby"} device={device} label={"NAŠE"}>Služby</SubTitle>
+        <svg xmlns="http://www.w3.org/2000/svg" width="122" height="23" viewBox="0 0 122 23" fill="none">
+  <path d="M121.061 12.5607C121.646 11.9749 121.646 11.0251 121.061 10.4393L111.515 0.893398C110.929 0.307612 109.979 0.307612 109.393 0.893398C108.808 1.47918 108.808 2.42893 109.393 3.01472L117.879 11.5L109.393 19.9853C108.808 20.5711 108.808 21.5208 109.393 22.1066C109.979 22.6924 110.929 22.6924 111.515 22.1066L121.061 12.5607ZM0 13H120V10H0V13Z" fill="#41E4CC"/>
 </svg>
-<Text size={"xl"} weight={600}>Kontakt</Text>
+
         </Link>
-        </section>}
+        <Link href={"/blog"} style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+        <SubTitle href={"/blog"} device={device} label={"DALŠÍ PŘÍSPĚVKY"}>Blog</SubTitle>
+        <svg xmlns="http://www.w3.org/2000/svg" width="122" height="23" viewBox="0 0 122 23" fill="none">
+  <path d="M121.061 12.5607C121.646 11.9749 121.646 11.0251 121.061 10.4393L111.515 0.893398C110.929 0.307612 109.979 0.307612 109.393 0.893398C108.808 1.47918 108.808 2.42893 109.393 3.01472L117.879 11.5L109.393 19.9853C108.808 20.5711 108.808 21.5208 109.393 22.1066C109.979 22.6924 110.929 22.6924 111.515 22.1066L121.061 12.5607ZM0 13H120V10H0V13Z" fill="#41BDE4"/>
+</svg>
+
+        </Link>
+        <Link href={"/kontakt"} style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+        <SubTitle href={"/kontakt"} device={device} label={"OZVĚTE SE NÁM"}>Kontakt</SubTitle>
+        <svg xmlns="http://www.w3.org/2000/svg" width="122" height="23" viewBox="0 0 122 23" fill="none">
+  <path d="M121.061 12.5607C121.646 11.9749 121.646 11.0251 121.061 10.4393L111.515 0.893398C110.929 0.307612 109.979 0.307612 109.393 0.893398C108.808 1.47918 108.808 2.42893 109.393 3.01472L117.879 11.5L109.393 19.9853C108.808 20.5711 108.808 21.5208 109.393 22.1066C109.979 22.6924 110.929 22.6924 111.515 22.1066L121.061 12.5607ZM0 13H120V10H0V13Z" fill="#4152E4"/>
+</svg>
+
+        </Link>
+      </section>}
     </>
   );
 }

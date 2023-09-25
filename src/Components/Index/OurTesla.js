@@ -6,6 +6,7 @@ import Link from "next/link";
 import useDevice from "../hooks/useDevice";
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from "react";
+import SubTitle from "../hooks/UI/SubTitle";
 
 export default function OurTesla({slides}){
     const theme = useMantineTheme()
@@ -18,7 +19,7 @@ export default function OurTesla({slides}){
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: "4vh",
+          gap: "0vh",
           alignItems: "flex-start",
         }}
       >
@@ -31,9 +32,7 @@ export default function OurTesla({slides}){
             alignItems: "flex-start",
           }}
         >
-          <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-            Naše Tesla
-          </Title>
+           <SubTitle href={"/o-nas"} device={device} label={"NAŠE TESLA"}>Čím jezdíme</SubTitle>
           <div
             style={{ position: "relative", width: "80vw", minHeight: "25vh" }}
           >
@@ -83,7 +82,9 @@ export default function OurTesla({slides}){
             úchvatným zrychlením a může se chlubit bezkonkurenčním výkonem a
             vytříbeným designem.
           </Text>
+          <SubTitle href={"/o-nas"} device={device} label={"VÝHODY"}>Proč u nás</SubTitle>
         </div>
+      
         <Carousel loop withIndicators sx={{ width: "100%", height: "90vh" }}>
           {slides.map((slide, index) => {
             return (
@@ -131,7 +132,7 @@ export default function OurTesla({slides}){
             );
           })}
         </Carousel>
-        <Link href={"/sluzby"}>
+        <Link href={"/sluzby"} style={{marginTop: "5vh"}}>
           <Button
             size="lg"
             rightIcon="->"

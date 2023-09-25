@@ -1,0 +1,36 @@
+.card {
+    background-color: rgb(255,255,255,0.8);
+  
+  }
+  
+  .label {
+    font-family: Greycliff CF, var(--mantine-font-family);
+    font-weight: 700;
+    line-height: 1;
+  }
+  
+  .lead {
+    font-family: Greycliff CF, var(--mantine-font-family);
+    font-weight: 700;
+    font-size: rem(22px);
+    line-height: 1;
+  }
+  
+  .inner {
+    display: flex;
+  
+    @media (max-width: "400px") {
+      flex-direction: column;
+    }
+  }
+  
+  .ring {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  
+    @media (max-width: "400px") {
+      justify-content: center;
+      margin-top: var(--mantine-spacing-md);
+    }
+  }
