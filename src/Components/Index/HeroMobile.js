@@ -32,7 +32,7 @@ export default function HeroMobile() {
         }}
       >
         <video
-          src="/video/mainTesla.mov"
+          src="/video/mainTesla.mp4"
           autoPlay
           muted
           loop
