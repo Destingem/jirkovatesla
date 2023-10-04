@@ -9,7 +9,9 @@ export default function useDevice(width) {
         return "t"
     } else if(width){
         return "l"
+    } else {
+        return "la"
     }
 
-    return mobile
+   
 }

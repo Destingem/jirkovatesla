@@ -168,9 +168,7 @@ export default function OurTesla({slides}){
             alignItems: "flex-start",
           }}
         >
-          <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-            Naše Tesla
-          </Title>
+        <SubTitle href={"/o-nas"} device={device} label={"NAŠE TESLA"}>Čím jezdíme</SubTitle>
       <div style={{display: "flex", alignItems: "start"}}>
       <div style={{}}>
         <div

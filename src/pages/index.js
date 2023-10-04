@@ -28,6 +28,8 @@ import { useRouter } from "next/router";
 import SubTitle from "@/Components/hooks/UI/SubTitle";
 import HeroMobile from "@/Components/Index/HeroMobile";
 import HeroDesktop from "@/Components/Index/HeroDesktop";
+import TeslaBlack from "../../public/images/teslaDark.jpg";
+import hexToRGBA from "@/Components/hooks/hexToRGBA";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -130,8 +132,8 @@ export default function Home() {
       </Head>
      
       {device !== "l" ? <HeroMobile/> : <HeroDesktop />}
-
-      <section
+    {device !== "l" ?    
+    <section
         style={{
           padding: "5vh 10vw",
           display: "flex",
@@ -162,7 +164,54 @@ export default function Home() {
             Více o nás
           </Button>
         </Link>
+      </section>: 
+         <section
+        style={{
+          padding: "5vh 10vw",
+          display: "flex",
+          flexDirection: "column",
+          gap: "4vh",
+          alignItems: "flex-start",
+        }}
+      >
+      <div style={{display: "flex", justifyContent: "space-between",  minHeight: "40vh"}}>
+        <div style={{maxWidth: "50%"}}>
+            <SubTitle href={"/o-nas"} device={device} label={"O NÁS"}>Kdo jsme</SubTitle>
+        <Text sx={{ fontSize: "1rem", lineHeight: "175%", marginTop: "3vh" }}>
+          Jsme nadšenci do rychlých aut a inovací. Baví nás rychle jezdit na
+          okruhu i si užívat klidné jízdy v příjemném interiéru luxusních aut.
+          Chceme tento zážitek poskytnout i vám a proto vám nabízíme naše služby
+          na vaší cestě.
+        </Text>
+        </div>
+        <div style={{minWidth: "25%", maxWidth: "30%", display: "flex", flexDirection: "column", alignItems: "center", position: "absolute", right: "10%"}}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style={{zIndex: 1}}>
+    <path d="M3.41 2H16V0H1a1 1 0 0 0-1 1v16h2V3.41l28.29 28.3 1.41-1.41z" data-name="7-Arrow Up" transform="rotate(90 16 16)" fill="rgb(255, 118, 118, 1)"/>
+</svg>
+        <div style={{display: "block", position: "absolute", width: "80%", height: "80%",  zIndex: 2, marginTop: "5vh"}}>
+       
+        <Image src={TeslaBlack} fill style={{objectFit: "cover"}}/>
+        </div>
+        </div>
+      </div>
+        <Link href={"/o-nas"}>
+          <Button
+            size="lg"
+            rightIcon="->"
+            variant="white"
+            sx={{
+              paddingLeft: "0",
+              color: theme.colors.neutral[7],
+              fontWeight: "700",
+              fontSize: "1.1rem",
+            }}
+          >
+            Více o nás
+          </Button>
+        </Link>
       </section>
+      }
+   
       <section
         style={{
           display: "flex",
@@ -181,7 +230,7 @@ export default function Home() {
         >
             <SubTitle href={"/sluzby"} device={device} label={"NAŠE SLUŽBY"}>Co nabízíme</SubTitle>
            
-          <Text sx={{ fontSize: "1rem", lineHeight: "175%" }}>
+          <Text sx={{ fontSize: "1rem", lineHeight: "175%", maxWidth: "60%" }}>
             Pronajímáme Teslu S se kterou se můžete projet na okruhu, zajet si
             kam potřebujete, nebo vás rádi odvezeme
           </Text>
@@ -238,10 +287,10 @@ export default function Home() {
             }
             else{
               return (
-              <Link href={card.link} style={{width: "24%", borderRadius: "12px" }}>
+              <Link href={card.link} style={{width: "24%", borderRadius: "0 0 12px 0" }}>
                 <Card
                   sx={{
-                    borderRadius: "12px",
+                    borderRadius: "0 0 12px 0",
                     background:
                       "url(" + card.image + ") lightgray 50% / cover no-repeat",
                     height: "40vh",
@@ -269,17 +318,17 @@ export default function Home() {
                   >
                     {card.name}
                   </Title>
-                  <Card.Section sx={{backgroundColor:  card.color, marginTop: "auto", padding: "2vh 1vw", display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: "25%"}}>
+                  <Card.Section sx={{backgroundColor:  hexToRGBA(card.color, 0.5), marginTop: "auto",  display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: "25%"}}>
                   <Text
                     sx={{
                       color: theme.colors.neutral[0],
                       maxWidth: "70%",
-                    
+                      padding: "2vh 1vw",
                     }}
                   >
                     {card.description}
                   </Text>
-                  <Link href={card.link}><BsArrowUpRight fontWeight={700} fontSize={"2.5rem"} color="#fff" /></Link>
+                  <Link style={{maxWidth: "30%", backgroundColor: card.color, padding: "2vh", height: "100%", display: "flex", alignItems: "center"}} href={card.link}><BsArrowUpRight fontWeight={700} fontSize={"2.5rem"} color="#fff" /></Link>
                   </Card.Section>
                 
                
