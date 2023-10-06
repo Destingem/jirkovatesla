@@ -5,6 +5,7 @@ import SubTitle from '../hooks/UI/SubTitle';
 
 
 export function FAQDetails({device, faq}) {
+  
   if(device == "m"){
     return (
   
@@ -16,7 +17,7 @@ export function FAQDetails({device, faq}) {
   
         <Accordion variant="separated">
           {faq.items.map(item => (
-            <Accordion.Item key={item.id} className={classes.item} value={item.id}>
+            <Accordion.Item key={item.id} className={classes.item} value={item.ids}>
               <Accordion.Control>{item.question}</Accordion.Control>
               <Accordion.Panel>{item.answer}</Accordion.Panel>
             </Accordion.Item>
@@ -36,7 +37,7 @@ export function FAQDetails({device, faq}) {
   
         <Accordion variant="separated">
           {faq.items.map(item => (
-            <Accordion.Item key={item.id} className={classes.item} value={item.id}>
+            <Accordion.Item key={item.id} className={classes.item} value={item.ids}>
               <Accordion.Control>{item.question}</Accordion.Control>
               <Accordion.Panel>{item.answer}</Accordion.Panel>
             </Accordion.Item>
@@ -56,7 +57,7 @@ export function FAQDetails({device, faq}) {
   
         <Accordion variant="separated">
           {faq.items.map(item => (
-            <Accordion.Item key={item.id} className={classes.item} value={item.id}>
+            <Accordion.Item key={item.id} className={classes.item} value={item.id + ""}>
               <Accordion.Control>{item.question}</Accordion.Control>
               <Accordion.Panel>{item.answer}</Accordion.Panel>
             </Accordion.Item>

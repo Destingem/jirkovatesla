@@ -30,14 +30,15 @@ import HeroMobile from "@/Components/Index/HeroMobile";
 import HeroDesktop from "@/Components/Index/HeroDesktop";
 import TeslaBlack from "../../public/images/teslaDark.jpg";
 import hexToRGBA from "@/Components/hooks/hexToRGBA";
+import Blog4Index from "@/Components/Index/Blog4Index";
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({blog, main}) {
   const { height, width } = useViewportSize();
   const device = useDevice(width);
   const theme = useMantineTheme();
   const router = useRouter();
-  console.log(router);
+
   let cardContents = [
     {
       name: "Zážitkové jízdy",
@@ -98,29 +99,7 @@ export default function Home() {
       color: "#E3AA19",
     },
   ];
-  let blogPosts = [
-    {
-    heading: "Změna otevírací doby",
-    date: "1.1.2022",
-    text: "Od 17.9. do 16.10. bude provoz našich služeb na okruhu Blansko a Jindřichov omezen z důvodu úpravy povrchu trati. ",
-    href: "/blog/zmena-oteviraci-doby",
-    color: "#19E3C5",
-  },
-  {
-    heading: "Změna otevírací doby",
-    date: "1.1.2022",
-    text: "Od 17.9. do 16.10. bude provoz našich služeb na okruhu Blansko a Jindřichov omezen z důvodu úpravy povrchu trati. ",
-    href: "/blog/zmena-oteviraci-doby",
-    color: "#19E3C5",
-  },
-  {
-    heading: "Změna otevírací doby",
-    date: "1.1.2022",
-    text: "Od 17.9. do 16.10. bude provoz našich služeb na okruhu Blansko a Jindřichov omezen z důvodu úpravy povrchu trati. ",
-    href: "/blog/zmena-oteviraci-doby",
-    color: "#19E3C5",
-  },
-]
+
 
   return (
     <>
@@ -356,7 +335,7 @@ export default function Home() {
       </section>
       <OurTesla slides={slides} />
    
-    <OurCustomers  />
+    <OurCustomers articles={main?.attributes?.articles} />
    
         <section
          style={{
@@ -367,81 +346,8 @@ export default function Home() {
         }}
         >
          <SubTitle href={"/blog"} device={device} label={"BLOG"}>Nové příspěvky</SubTitle>
-        <Grid gutter={device == "m" ? "" : "xl"} sx={{ width: "100%" }}>
-     {blogPosts.map((post, index)=> {
-let {heading, date, text, href, color} = post
-let cardSpan = 12;
-let cardPadding = "4vh 10vw"
-if(device == "l"){
-  cardSpan = 4;
-  cardPadding = "4vh 2vw"
-} else if(device == "t"){
-  cardSpan = 6;
-  cardPadding = "4vh 3vw"
-}
-function hexToRGBA(hex, opacity = 1) {
-  const [r, g, b] = hex.match(/\w\w/g).map((xx) => parseInt(xx, 16));
-  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
-}
-      return(
-        <Grid.Col
-  span={cardSpan}
-  sx={{
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "left",
-    justifyContent: "center",
-    padding: cardPadding,
-    marginBottom: "2vh",
-    backgroundColor: hexToRGBA(color, 0.5),
-    border: device == "m" ? "none" : "1vw solid #fff",
-  
-    
-    '::before': {
-      content: '""',
-      position: "absolute",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      background: 'url(/images/backgroundAbstract.jpg) lightgray 50% / cover no-repeat',
-      opacity: 0.25,
-      zIndex: -1,
-    }
-  }}
->
-            <Title order={4} size={"1.4rem"} style={{}}>{heading}</Title>
-            <Text size={"0.9rem"} weight={700} style={{marginBottom: "3vh"}}>{date}</Text>
-           
-            <Text>{text}</Text>
-            <Link href={href}>
-          <Button
-            size="lg"
-            rightIcon="->"
-            variant="white"
-            sx={{
-              marginTop: "3vh",
-              color: theme.colors.neutral[7],
-              fontWeight: "700",
-              fontSize: "1.1rem",
-              marginBottom: "4vh",
-              paddingLeft: "0",
-              backgroundColor: "transparent",
-              marginBottom: "0",
-              transition: "all 0.3s ease-in-out",
-              ":hover": {
-                color: theme.colors.primary[7],
-              }
-            }}
-          >
-            Číst dále
-          </Button>
-        </Link>
-          </Grid.Col>
-      )
-     })}
-        </Grid>
+
+        <Blog4Index blog={blog} device={device} />
         <Link href={"/o-nas"}>
           <Button
             size="lg"
@@ -501,3 +407,33 @@ function hexToRGBA(hex, opacity = 1) {
   );
 }
 
+
+export async function getStaticProps() {
+
+   // recenze
+   let fetched2 = await fetch("http://38.242.151.80:1336/api/blogs?populate=deep", {
+    headers: {
+        Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
+    }
+    })
+    var blog = await fetched2.json()
+    blog = blog?.data
+
+    var main = await fetch("http://38.242.151.80:1336/api/main-stranka?populate=deep", {
+      headers: {
+          Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
+      }
+      })
+      main = await main.json()
+      main = main?.data
+       
+
+        return ({
+        props: {
+         blog,
+         main,
+         
+        },
+        revalidate: 60,
+    })
+  }

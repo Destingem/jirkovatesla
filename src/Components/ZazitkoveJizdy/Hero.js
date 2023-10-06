@@ -54,7 +54,7 @@ export default function Hero({ device, theme, hero }) {
                 objectFit="cover"
                 animate={true}
                 
-                src={hero?.img1?.src}
+                src={"http://38.242.151.80:1336" + hero?.img1?.data?.attributes?.url}
               />
              </div>
             </Grid.Col>
@@ -67,7 +67,7 @@ export default function Hero({ device, theme, hero }) {
                 objectFit="cover"
                 animate={true}
                 
-                src={hero?.img2?.src}
+                src={"http://38.242.151.80:1336" + hero?.img2?.data?.attributes?.url}
               />
              </div>
             </Grid.Col>
@@ -146,7 +146,7 @@ export default function Hero({ device, theme, hero }) {
                 objectFit="cover"
                 animate={true}
                 
-                src={hero?.img1?.src}
+                src={"http://38.242.151.80:1336" + hero?.img1?.data?.attributes?.url}
               />
              </div>
             </Grid.Col>
@@ -159,7 +159,7 @@ export default function Hero({ device, theme, hero }) {
                 objectFit="cover"
                 animate={true}
                 
-                src={hero?.img2?.src}
+                src={"http://38.242.151.80:1336" + hero?.img2?.data?.attributes?.url}
               />
              </div>
             </Grid.Col>

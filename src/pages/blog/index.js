@@ -5,46 +5,20 @@ import { Button, Grid, Text, Title, useMantineTheme } from "@mantine/core";
 import { useViewportSize } from "@mantine/hooks";
 import Link from "next/link";
 
-export default function Blog() {
+export default function Blog({blog, blogStr}) {
+  console.log(blogStr)
+  console.log(blog)
   const theme = useMantineTheme();
   const { height, width } = useViewportSize();
   const device = useDevice(width);
-  let prispevky = [
-    {
-      name: "Změna otevírací doby",
-      date: "1/9/2004",
-      text: "Od 17.9. do 16.10. bude provoz našich služeb na okruhu Blansko a Jindřichov omezen z důvodu úpravy povrchu trati. ",
-      href: "",
-      color: "#41E4C7",
-      img: "",
-    },
-    {
-        name: "Změna otevírací doby",
-        date: "1/9/2004",
-        text: "Od 17.9. do 16.10. bude provoz našich služeb na okruhu Blansko a Jindřichov omezen z důvodu úpravy povrchu trati. ",
-        href: "",
-        color: "",
-        img: "#41E4C7",
-      },
-      {
-        name: "Změna otevírací doby",
-        date: "1/9/2004",
-        text: "Od 17.9. do 16.10. bude provoz našich služeb na okruhu Blansko a Jindřichov omezen z důvodu úpravy povrchu trati. ",
-        href: "",
-        color: "#41E4C7",
-        img: "",
-      },
-  ];
+  
   return (
     <div style={{ marginTop: "0vh" }}>
-      <PageHero heading={"Blog"}>
-        Jsme nadšenci do rychlých aut a inovací. Baví nás rychle jezdit na
-        okruhu i si užívat klidné jízdy v příjemném interiéru luxusních aut.
-        Chceme tento zážitek poskytnout i vám a proto vám nabízíme naše služby
-        na vaší cestě.
+      <PageHero heading={blogStr?.nadpis ? blogStr?.nadpis  : "Blog"}>
+        {blogStr?.popis_stranky}
       </PageHero>
     {device == "m" &&   <div>
-        {prispevky.map(({ name, date, text, href, color, img }, index) => {
+        {blog.map((thisBlog, index) => {
           return (
             <div>
             <div
@@ -65,7 +39,7 @@ export default function Blog() {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundImage: img ? img : "url(/images/backgroundAbstract.jpg)",
+      backgroundImage: thisBlog?.attributes?.nahledovka?.data?.attributes?.url ? "url(http://38.242.151.80:1336" + thisBlog.attributes.nahledovka.data.attributes.url + ")" : "url(/images/backgroundAbstract.jpg)",
       backgroundSize: "cover",
       backgroundPosition: "center",
       opacity: 0.75,  // Průhlednost 0.75 pro background obrázek
@@ -73,13 +47,16 @@ export default function Blog() {
     }}
   ></div>
   <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-    {name}
+  {thisBlog?.attributes?.nazev}
   </Title>
 </div>
             <div style={{padding: "5vh 10vw", display: "flex", flexDirection: "column", gap: "2vh"}}>
-            <Text size="md">{date}</Text>
-              <Text>{text}</Text>
-              <Link href={href ? href : "#"} style={{}}>
+            <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+         <Text size="md" weight={700}>{new Date(thisBlog?.attributes?.datum).toLocaleDateString()}</Text>
+         <Text size="md" weight={500}>{thisBlog?.attributes?.autor}</Text>
+         </div>
+              <Text>{thisBlog?.attributes?.kratky_popis}</Text>
+              <Link  href={thisBlog?.attributes?.nazev ? "/blog/" + thisBlog?.attributes?.nazev.toLowerCase().replace(" ", "").normalize('NFD').replace(/[\u0300-\u036f]/g, '') :"#"} style={{}}>
                 <Button
                   size="lg"
                   rightIcon="->"
@@ -101,7 +78,7 @@ export default function Blog() {
         })}
       </div>}
       {device !== "m" &&   <Grid sx={{margin: "5vh 10vw"}}>
-        {prispevky.map(({ name, date, text, href, color, img }, index) => {
+        {blog.map((thisBlog, index) => {
           return (
             <Grid.Col span={3} >
             <div
@@ -122,7 +99,7 @@ export default function Blog() {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundImage: img ? img : "url(/images/backgroundAbstract.jpg)",
+      backgroundImage: thisBlog?.attributes?.nahledovka?.data?.attributes?.url ? "url(http://38.242.151.80:1336" + thisBlog.attributes.nahledovka.data.attributes.url + ")" : "url(/images/backgroundAbstract.jpg)",
       backgroundSize: "cover",
       backgroundPosition: "center",
       opacity: 0.75,  // Průhlednost 0.75 pro background obrázek
@@ -130,13 +107,16 @@ export default function Blog() {
     }}
   ></div>
   <Title weight={600} order={2} size={"2.3rem"} style={{}}>
-    {name}
+    {thisBlog?.attributes?.nazev}
   </Title>
 </div>
             <div style={{padding: "3vh 2vw", display: "flex", flexDirection: "column", gap: "2vh", backgroundColor: theme.colors.cyan[0]}}>
-            <Text size="md" weight={700}>{date}</Text>
-              <Text>{text}</Text>
-              <Link href={href ? href : "#"} style={{}}>
+         <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+         <Text size="md" weight={700}>{new Date(thisBlog?.attributes?.datum).toLocaleDateString()}</Text>
+         <Text size="md" weight={500}>{thisBlog?.attributes?.autor}</Text>
+         </div>
+              <Text>{thisBlog?.attributes?.kratky_popis}</Text>
+              <Link href={thisBlog?.attributes?.nazev ? "/blog/" + thisBlog?.attributes?.nazev.toLowerCase().replace(" ", "").normalize('NFD').replace(/[\u0300-\u036f]/g, '') :"#"} style={{}}>
                 <Button
                   size="lg"
                   rightIcon="->"
@@ -160,3 +140,31 @@ export default function Blog() {
     </div>
   );
 }
+
+export async function getStaticProps() {
+  // blog stranka
+  let fetched = await fetch("http://38.242.151.80:1336/api/blog-stranka?populate=deep", {
+        headers: {
+            Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
+        }
+        })
+        var blogStr = await fetched.json()
+        blogStr = blogStr?.data?.attributes
+   // recenze
+   let fetched2 = await fetch("http://38.242.151.80:1336/api/blogs?populate=deep", {
+    headers: {
+        Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
+    }
+    })
+    var blog = await fetched2.json()
+    blog = blog?.data
+         
+
+        return ({
+        props: {
+         blog,
+          blogStr,
+        },
+        revalidate: 60,
+    })
+  }

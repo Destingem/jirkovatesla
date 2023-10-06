@@ -1,12 +1,27 @@
 import { Grid, Skeleton, Container, Image, Text } from '@mantine/core';
 import SubTitle from '../hooks/UI/SubTitle';
 import useDevice from '../hooks/useDevice';
+import { useState } from 'react';
+import { useDisclosure, useHotkeys } from '@mantine/hooks';
+import SubModal from './SubModal';
 
 
 const child = <Skeleton height={"30vh"} radius="md" animate={true} />;
 
 export function PhotosGallery({device, images}) {
- 
+  useHotkeys([
+   // arrow right
+    ['ArrowRight', () => { setActivePhoto((activePhoto + 1) % photos.length) }],
+    // arrow left
+    ['ArrowLeft', () => { setActivePhoto((activePhoto - 1 + photos.length) % photos.length) }],
+  ]);
+  const [activePhoto, setActivePhoto] = useState(0);
+  const [opened, { open, close }] = useDisclosure(false);
+ console.log(images)
+ function handleClick(index){
+    setActivePhoto(index)
+    open()
+ }
   const photos = images?.map((image, index)=> {
     var span = 4;
     
@@ -36,7 +51,10 @@ export function PhotosGallery({device, images}) {
     return {...image, span: span, index}
   })
   return (
- <div>
+<>
+
+<div style={{zIndex: "2"}}>
+
      <div style={{ display: "flex", flexDirection: "column", gap: "3vh", }}>
     <SubTitle href={"#"} device={device} label={"GALERIE"} style={{ padding: device == "m" ? "0 10vw" : "0"}}>
       Fotky
@@ -44,8 +62,8 @@ export function PhotosGallery({device, images}) {
       <Grid sx={{minHeight: "50vh"}}>
         {photos?.map((image, index) => {
           return(
-          <Grid.Col key={index} span={image.span}>
-            <Image height={"30vh"} radius="md" animate={true} src={image.src}/>
+          <Grid.Col onClick={()=> {handleClick(index)}} key={index} span={image.span}>
+          <Image height={"30vh"} radius="md" animate={true} src={"http://38.242.151.80:1336" + image.attributes.url}/>
           </Grid.Col>
         )
         })}
@@ -55,6 +73,10 @@ export function PhotosGallery({device, images}) {
       
     </div>
  </div>
+ <div>
+ <SubModal opened={opened} close={close} activePhoto={activePhoto} setActivePhoto={setActivePhoto} photos={photos}/>
+ </div>
+</>
  
   );
 }

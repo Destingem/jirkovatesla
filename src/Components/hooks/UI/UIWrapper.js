@@ -10,7 +10,7 @@ export default function UIWrapper({ children }) {
   const device = useDevice(width);
 
   const [data, setData] = useState(null);
-  useEffect(()=> {
+  {/*useEffect(()=> {
       let fetchFunction = async ()=>{
          try {
            var data = await fetch("https://www.polystyrensypany.cz/api/getKontakty")
@@ -28,7 +28,7 @@ export default function UIWrapper({ children }) {
           }
       }
       fetchFunction().then(data => setData(data))
-  }, [])
+  }, [])*/}
   return (
     <div style={{overflow: "hidden"}}>
    {device == "m" ? <NavBarMobile /> : <Navbar />}

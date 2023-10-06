@@ -12,7 +12,10 @@ export default function OurReviews({articles}){
    
     const articleReducer = (state, action) => {
       console.log(state);
-      switch (action.type) {
+    if(state.articles.length <= 3){
+      return state
+    }
+    switch (action.type) {
         case "NEXT":
           // Get the next article after the currently last visible one
           const nextIndex = (state.current[2].index + 1) % articles.length;
@@ -93,8 +96,8 @@ export default function OurReviews({articles}){
                               <div style={{ display: "flex", alignItems: "center", gap: "1vw" }}>
                                   <Avatar size={"lg"} radius={""} color="red"><SiTesla /></Avatar>
                                   <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
-                                      <Text weight={700}>{article.author.name}</Text>
-                                      <Text weight={400}>{article.author.role}</Text>
+                                      <Text weight={700}>{article.author_name}</Text>
+                                      <Text weight={400}>{article.author_role}</Text>
                                   </div>
                               </div>
                               <Card.Section sx={{ backgroundColor: "#e21837", marginTop: "2vh"}}>
@@ -169,8 +172,8 @@ export default function OurReviews({articles}){
                                         <div style={{ display: "flex", alignItems: "center", gap: "1vw" }}>
                                             <Avatar size={"lg"} radius={""} color="red"><SiTesla /></Avatar>
                                             <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
-                                                <Text weight={700}>{article.author.name}</Text>
-                                                <Text weight={400}>{article.author.role}</Text>
+                                                <Text weight={700}>{article.author_name}</Text>
+                                                <Text weight={400}>{article.author_role}</Text>
                                             </div>
                                         </div>
                                         <Link href={"/o-nas"} style={{ marginTop: "auto" }}>
