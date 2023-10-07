@@ -39,7 +39,7 @@ export default function Blog({blog, blogStr}) {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundImage: thisBlog?.attributes?.nahledovka?.data?.attributes?.url ? "url(http://38.242.151.80:1336" + thisBlog.attributes.nahledovka.data.attributes.url + ")" : "url(/images/backgroundAbstract.jpg)",
+      backgroundImage: thisBlog?.attributes?.nahledovka?.data?.attributes?.url ? "url(https://cms.tesla.ondrejzaplatilek.cz" + thisBlog.attributes.nahledovka.data.attributes.url + ")" : "url(/images/backgroundAbstract.jpg)",
       backgroundSize: "cover",
       backgroundPosition: "center",
       opacity: 0.75,  // Průhlednost 0.75 pro background obrázek
@@ -99,7 +99,7 @@ export default function Blog({blog, blogStr}) {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundImage: thisBlog?.attributes?.nahledovka?.data?.attributes?.url ? "url(http://38.242.151.80:1336" + thisBlog.attributes.nahledovka.data.attributes.url + ")" : "url(/images/backgroundAbstract.jpg)",
+      backgroundImage: thisBlog?.attributes?.nahledovka?.data?.attributes?.url ? "url(https://cms.tesla.ondrejzaplatilek.cz" + thisBlog.attributes.nahledovka.data.attributes.url + ")" : "url(/images/backgroundAbstract.jpg)",
       backgroundSize: "cover",
       backgroundPosition: "center",
       opacity: 0.75,  // Průhlednost 0.75 pro background obrázek
@@ -143,7 +143,7 @@ export default function Blog({blog, blogStr}) {
 
 export async function getStaticProps() {
   // blog stranka
-  let fetched = await fetch("http://38.242.151.80:1336/api/blog-stranka?populate=deep", {
+  let fetched = await fetch("https://cms.tesla.ondrejzaplatilek.cz/api/blog-stranka?populate=deep", {
         headers: {
             Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
         }
@@ -151,7 +151,7 @@ export async function getStaticProps() {
         var blogStr = await fetched.json()
         blogStr = blogStr?.data?.attributes
    // recenze
-   let fetched2 = await fetch("http://38.242.151.80:1336/api/blogs?populate=deep", {
+   let fetched2 = await fetch("https://cms.tesla.ondrejzaplatilek.cz/api/blogs?populate=deep", {
     headers: {
         Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
     }

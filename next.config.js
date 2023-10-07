@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['38.242.151.80'],
+    domains: ['38.242.151.80', "cms.tesla.ondrejzaplatilek.cz"],
 }
 }
 

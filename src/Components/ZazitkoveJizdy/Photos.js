@@ -63,7 +63,7 @@ export function PhotosGallery({device, images}) {
         {photos?.map((image, index) => {
           return(
           <Grid.Col onClick={()=> {handleClick(index)}} key={index} span={image.span}>
-          <Image height={"30vh"} radius="md" animate={true} src={"http://38.242.151.80:1336" + image.attributes.url}/>
+          <Image height={"30vh"} radius="md" animate={true} src={"https://cms.tesla.ondrejzaplatilek.cz" + image.attributes.url}/>
           </Grid.Col>
         )
         })}

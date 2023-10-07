@@ -39,68 +39,8 @@ export default function Home({blog, main}) {
   const theme = useMantineTheme();
   const router = useRouter();
 
-  let cardContents = [
-    {
-      name: "Zážitkové jízdy",
-      description: "Zažijte maximální rychlost až 290 kilometrů za hodinu",
-      image: "/images/zazitkove_jizdyb.jpg",
-      color: theme.colors.primary[4],
-      link: "/sluzby/zazitkove-jizdy",
-    },
-    {
-      name: "Pronájem",
-      description: "Užívejte si komfortu při cestování s nabíjením zdarma",
-      image: "/images/pronajemb.jpg",
-      color: "#71E4D3",
-      link: "/sluzby/pronajem",
-    },
-    {
-      name: "Taxi",
-      description: "Spolehněte se na klidný a bezpečný odvoz",
-      image: "/images/taxib.jpg",
-      color: "#E1E471",
-      link: "/sluzby/taxi",
-    },
-    {
-      name: "Akce",
-      description: "Reprezentujte se s prémiovým vozem Tesla S.",
-      image: "/images/akce.avif",
-      color: "#8171E4",
-      link: "/sluzby/akce",
-    },
-  ];
-  let slides = [
-    {
-      name: "Nabíjení zdarma",
-      description:
-        "Nedělejte si starosti s provozem. Díky rozrůstající se síti nabíjecích stanic Tesla Supercharger se nemusíte bát o nabíjení v Česku, ani okolních státech, kde je sít ještě rozšířenější. Navíc při pronájmu naší tesly máte zajištěno nabíjení zdarma u všech nabíjecích stanic společnosti Tesla",
-      img: "/images/teslaMap.png",
-      color: "#19E3C5",
-    },
-    {
-      name: "Místo pro vše",
-      description:
-        "Vezměte na výlet celou rodinu. Přes sportovní ladění vozu je Tesla S též vhodným autem pro cestování za zážitky. Do kufru s objemem 722 litrů se vejdou nejen zavazadla ale i kola, lyže či jiné sportovní doplňky.",
-      img: "/images/teslaKufr.png",
-      color: "#19BFE3",
-    },
-    {
-      name: "Klidná jízda",
-      description:
-        "Za vašeho dozoru umožňuje Autopilot vozu v rámci vašeho pruhu automaticky řídit, zrychlovat a brzdit. Pomáhá vám tak s nejnáročnější částí řízení. S over-the-air aktualizacemi jsou nejnovější funkce okamžitě k dispozici.",
-      img: "/images/teslaKlid.png",
-      color: "#DFE319",
-    },
-    {
-      name: "Bezpečí na prvním místě",
-      description:
-        "Bezpečnost je nejdůležitější u každého vozu Tesla. Tesla S je navržena tak, aby překračovaly bezpečnostní standardy. Model S získal v roce 2022 5 hvězdiček v hodnocení bezpečnosti Euro NCAP a získal ocenění Nejlepší ve své třídě v kategoriích Executive a Pure Electric.",
-      img: "/images/teslaSafe.png",
-      color: "#E3AA19",
-    },
-  ];
 
-
+console.log(main)
   return (
     <>
       <Head>
@@ -110,7 +50,7 @@ export default function Home({blog, main}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
      
-      {device !== "l" ? <HeroMobile/> : <HeroDesktop />}
+      {device !== "l" ? <HeroMobile main={main.attributes} /> : <HeroDesktop blog={blog} main={main.attributes} />}
     {device !== "l" ?    
     <section
         style={{
@@ -121,12 +61,9 @@ export default function Home({blog, main}) {
           alignItems: "flex-start",
         }}
       >
-        <SubTitle href={"/o-nas"} device={device} label={"O NÁS"}>Kdo jsme</SubTitle>
+        <SubTitle href={"/o-nas"} device={device} label={main?.attributes?.kdoJsme?.sm_t }>{main?.attributes?.kdoJsme?.big_t }</SubTitle>
         <Text sx={{ fontSize: "1rem", lineHeight: "175%" }}>
-          Jsme nadšenci do rychlých aut a inovací. Baví nás rychle jezdit na
-          okruhu i si užívat klidné jízdy v příjemném interiéru luxusních aut.
-          Chceme tento zážitek poskytnout i vám a proto vám nabízíme naše služby
-          na vaší cestě.
+        {main?.attributes?.kdoJsme?.desc }
         </Text>
         <Link href={"/o-nas"}>
           <Button
@@ -140,7 +77,7 @@ export default function Home({blog, main}) {
               fontSize: "1.1rem",
             }}
           >
-            Více o nás
+           {main?.attributes?.kdoJsme?.btnLabel }
           </Button>
         </Link>
       </section>: 
@@ -155,12 +92,9 @@ export default function Home({blog, main}) {
       >
       <div style={{display: "flex", justifyContent: "space-between",  minHeight: "40vh"}}>
         <div style={{maxWidth: "50%"}}>
-            <SubTitle href={"/o-nas"} device={device} label={"O NÁS"}>Kdo jsme</SubTitle>
+            <SubTitle href={"/o-nas"} device={device} label={main?.attributes?.kdoJsme?.sm_t }>{main?.attributes?.kdoJsme?.big_t }</SubTitle>
         <Text sx={{ fontSize: "1rem", lineHeight: "175%", marginTop: "3vh" }}>
-          Jsme nadšenci do rychlých aut a inovací. Baví nás rychle jezdit na
-          okruhu i si užívat klidné jízdy v příjemném interiéru luxusních aut.
-          Chceme tento zážitek poskytnout i vám a proto vám nabízíme naše služby
-          na vaší cestě.
+        {main?.attributes?.kdoJsme?.desc }
         </Text>
         </div>
         <div style={{minWidth: "25%", maxWidth: "30%", display: "flex", flexDirection: "column", alignItems: "center", position: "absolute", right: "10%"}}>
@@ -169,7 +103,7 @@ export default function Home({blog, main}) {
 </svg>
         <div style={{display: "block", position: "absolute", width: "80%", height: "80%",  zIndex: 2, marginTop: "5vh"}}>
        
-        <Image src={TeslaBlack} fill style={{objectFit: "cover"}}/>
+        <Image src={"https://cms.tesla.ondrejzaplatilek.cz" + main?.attributes?.kdoJsme?.img.data.attributes.url} fill style={{objectFit: "cover"}}/>
         </div>
         </div>
       </div>
@@ -185,7 +119,7 @@ export default function Home({blog, main}) {
               fontSize: "1.1rem",
             }}
           >
-            Více o nás
+              {main?.attributes?.kdoJsme?.btnLabel }
           </Button>
         </Link>
       </section>
@@ -207,22 +141,22 @@ export default function Home({blog, main}) {
             gap: "4vh",
           }}
         >
-            <SubTitle href={"/sluzby"} device={device} label={"NAŠE SLUŽBY"}>Co nabízíme</SubTitle>
+            <SubTitle href={"/sluzby"} device={device} label={main?.attributes?.coNabizime?.sm_t}>{main?.attributes?.coNabizime?.big_t}</SubTitle>
            
           <Text sx={{ fontSize: "1rem", lineHeight: "175%", maxWidth: "60%" }}>
-            Pronajímáme Teslu S se kterou se můžete projet na okruhu, zajet si
-            kam potřebujete, nebo vás rádi odvezeme
+           {main?.attributes?.coNabizime?.desc}
           </Text>
         </div>
         <div style={device !== "l" ? {} : {display: "flex", width: "100%", justifyContent: "space-between", padding: "0 7%"}}>
-          {cardContents.map((card) => {
+          {main?.attributes?.coNabizime.cardContents?.map((card) => {
+            console.log(card.image.data.attributes.url)
             if(device !== "l"){
               return (
               <Link href={card.link}>
                 <div
                   style={{
                     background:
-                      "url(" + card.image + ") lightgray 50% / cover no-repeat",
+                      "url(https://cms.tesla.ondrejzaplatilek.cz" + card.image.data.attributes.url + ") lightgray 50% / cover no-repeat",
                     height: "25vh",
                     minHeight: "200px",
                     backdropFilter: "saturate(0)",
@@ -271,7 +205,7 @@ export default function Home({blog, main}) {
                   sx={{
                     borderRadius: "0 0 12px 0",
                     background:
-                      "url(" + card.image + ") lightgray 50% / cover no-repeat",
+                    "url(https://cms.tesla.ondrejzaplatilek.cz" + card.image.data.attributes.url + ") lightgray 50% / cover no-repeat",
                     height: "40vh",
                     minHeight: "200px",
                     backdropFilter: "saturate(0)",
@@ -333,7 +267,7 @@ export default function Home({blog, main}) {
           </Button>
         </Link>
       </section>
-      <OurTesla slides={slides} />
+      <OurTesla nb={main?.attributes?.cimJezdime} slides={main?.attributes?.whyUs} />
    
     <OurCustomers articles={main?.attributes?.articles} />
    
@@ -411,7 +345,7 @@ export default function Home({blog, main}) {
 export async function getStaticProps() {
 
    // recenze
-   let fetched2 = await fetch("http://38.242.151.80:1336/api/blogs?populate=deep", {
+   let fetched2 = await fetch("https://cms.tesla.ondrejzaplatilek.cz/api/blogs?populate=deep", {
     headers: {
         Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
     }
@@ -419,7 +353,7 @@ export async function getStaticProps() {
     var blog = await fetched2.json()
     blog = blog?.data
 
-    var main = await fetch("http://38.242.151.80:1336/api/main-stranka?populate=deep", {
+    var main = await fetch("https://cms.tesla.ondrejzaplatilek.cz/api/main-stranka?populate=deep", {
       headers: {
           Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
       }

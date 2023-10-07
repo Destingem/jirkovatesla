@@ -30,7 +30,7 @@ console.log(blog)
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: thisBlog?.attributes?.nahledovka?.data?.attributes?.url ? "url(http://38.242.151.80:1336" + thisBlog.attributes.nahledovka.data.attributes.url + ")" : "url(/images/backgroundAbstract.jpg)",
+          backgroundImage: thisBlog?.attributes?.nahledovka?.data?.attributes?.url ? "url(https://cms.tesla.ondrejzaplatilek.cz" + thisBlog.attributes.nahledovka.data.attributes.url + ")" : "url(/images/backgroundAbstract.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 0.75,  // Průhlednost 0.75 pro background obrázek
@@ -90,7 +90,7 @@ console.log(blog)
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: thisBlog?.attributes?.nahledovka?.data?.attributes?.url ? "url(http://38.242.151.80:1336" + thisBlog.attributes.nahledovka.data.attributes.url + ")" : "url(/images/backgroundAbstract.jpg)",
+          backgroundImage: thisBlog?.attributes?.nahledovka?.data?.attributes?.url ? "url(https://cms.tesla.ondrejzaplatilek.cz" + thisBlog.attributes.nahledovka.data.attributes.url + ")" : "url(/images/backgroundAbstract.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 0.75,  // Průhlednost 0.75 pro background obrázek

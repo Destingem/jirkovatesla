@@ -8,7 +8,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from "react";
 import SubTitle from "../hooks/UI/SubTitle";
 
-export default function OurTesla({slides}){
+export default function OurTesla({slides, nb}){
     const theme = useMantineTheme()
     const { height, width } = useViewportSize();
     const device = useDevice(width);
@@ -32,55 +32,36 @@ export default function OurTesla({slides}){
             alignItems: "flex-start",
           }}
         >
-           <SubTitle href={"/o-nas"} device={device} label={"NAŠE TESLA"}>Čím jezdíme</SubTitle>
+           <SubTitle href={"/o-nas"} device={device} label={nb?.sm_t}>{nb?.big_t}</SubTitle>
           <div
             style={{ position: "relative", width: "80vw", minHeight: "25vh" }}
           >
             <Image
-              src={"/images/ourTesla.png"}
+              src={"https://cms.tesla.ondrejzaplatilek.cz" + nb?.img?.data?.attributes?.url}
               layout={"fill"}
               style={{ objectFit: "cover" }}
             />
           </div>
           <Grid sx={{ width: "100%" }}>
-            <Grid.Col
-              span={4}
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
-                322
-              </Text>
-              <Text size={"1rem"} align="center" sx={{}}>
-                km/h
-              </Text>
-            </Grid.Col>
-            <Grid.Col
-              span={4}
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
-                634
-              </Text>
-              <Text size={"1rem"} align="center" sx={{}}>
-                km dojezd
-              </Text>
-            </Grid.Col>
-            <Grid.Col
-              span={4}
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
-                3,2
-              </Text>
-              <Text size={"1rem"} align="center" sx={{}}>
-                s 0-100
-              </Text>
-            </Grid.Col>
+            {nb?.stats?.map((stat, index) => {
+              return (
+                <Grid.Col
+                  span={4}
+                  sx={{ display: "flex", flexDirection: "column" }}
+                >
+                  <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
+                    {stat?.value}
+                  </Text>
+                  <Text size={"1rem"} align="center" sx={{}}>
+                    {stat?.name}
+                  </Text>
+                </Grid.Col>
+              );
+            })
+            }
           </Grid>
-          <Text>
-            Konstrukce vozu Model S umožňuje vynikající rychlost a dojezd s
-            úchvatným zrychlením a může se chlubit bezkonkurenčním výkonem a
-            vytříbeným designem.
+          <Text sx={{lineHeight: "190%"}}>
+          {nb?.desc}
           </Text>
           <SubTitle href={"/o-nas"} device={device} label={"VÝHODY"}>Proč u nás</SubTitle>
         </div>
@@ -123,7 +104,7 @@ export default function OurTesla({slides}){
                   }}
                 >
                   <Image
-                    src={slide.img}
+                    src={"https://cms.tesla.ondrejzaplatilek.cz" + slide?.img?.data?.attributes?.url}
                     layout={"fill"}
                     style={{ objectFit: "contain" }}
                   />
@@ -168,68 +149,40 @@ export default function OurTesla({slides}){
             alignItems: "flex-start",
           }}
         >
-        <SubTitle href={"/o-nas"} device={device} label={"NAŠE TESLA"}>Čím jezdíme</SubTitle>
+        <SubTitle href={"/o-nas"} device={device} label={nb?.sm_t}>{nb?.big_t}</SubTitle>
       <div style={{display: "flex", alignItems: "start"}}>
       <div style={{}}>
         <div
             style={{ position: "relative", width: "40vw", minHeight: "50vh" }}
           >
             <Image
-              src={"/images/ourTesla.png"}
-              layout={"fill"}
-              style={{ objectFit: "cover" }}
-            />
+                    src={"https://cms.tesla.ondrejzaplatilek.cz" + nb?.img?.data?.attributes?.url}
+                    layout={"fill"}
+                    style={{ objectFit: "contain" }}
+                  />
           </div>
           <Grid sx={{ width: "100%", marginTop: "5vh" }}>
-            <Grid.Col
-              span={4}
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
-                322
-              </Text>
-              <Text size={"1rem"} align="center" sx={{}}>
-                km za hodinu
-              </Text>
-            </Grid.Col>
-            <Grid.Col
-              span={4}
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
-                634
-              </Text>
-              <Text size={"1rem"} align="center" sx={{}}>
-                km dojezd
-              </Text>
-            </Grid.Col>
-            <Grid.Col
-              span={4}
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
-                3,2
-              </Text>
-              <Text size={"1rem"} align="center" sx={{}}>
-                sekundy z 0-100
-              </Text>
-            </Grid.Col>
+          {nb?.stats?.map((stat, index) => {
+              return (
+                <Grid.Col
+                  span={4}
+                  sx={{ display: "flex", flexDirection: "column" }}
+                >
+                  <Text size={"2.5rem"} align="center" weight={700} sx={{}}>
+                    {stat?.value}
+                  </Text>
+                  <Text size={"1rem"} align="center" sx={{}}>
+                    {stat?.name}
+                  </Text>
+                </Grid.Col>
+              );
+            })
+            }
           </Grid>
         </div>
       <div style={{padding: "5vh 5vw", display: "flex", flexDirection: "column", alignItems: "end", justifyContent: "space-between", height: "100%"}}>
       <Text sx={{lineHeight: "175%"}}>
-            Konstrukce vozu Model S umožňuje vynikající rychlost a dojezd s
-            úchvatným zrychlením a může se chlubit bezkonkurenčním výkonem a
-            vytříbeným designem.
-            Konstrukce vozu Model S umožňuje vynikající rychlost a dojezd s
-            úchvatným zrychlením a může se chlubit bezkonkurenčním výkonem a
-            vytříbeným designem.
-            Konstrukce vozu Model S umožňuje vynikající rychlost a dojezd s
-            úchvatným zrychlením a může se chlubit bezkonkurenčním výkonem a
-            vytříbeným designem.
-            Konstrukce vozu Model S umožňuje vynikající rychlost a dojezd s
-            úchvatným zrychlením a může se chlubit bezkonkurenčním výkonem a
-            vytříbeným designem.
+          {nb?.desc}
           </Text>
           <Link href={"/o-nas"} style={{marginTop: "20vh"}} >
           {" "}
@@ -240,7 +193,7 @@ export default function OurTesla({slides}){
             radius={60}
             color={"dark"}
           >
-            O našem autě
+            {nb?.btnLabel}
           </Button>
         </Link>
       </div>
@@ -288,7 +241,7 @@ export default function OurTesla({slides}){
                   }}
                 >
                   <Image
-                    src={slide.img}
+                     src={"https://cms.tesla.ondrejzaplatilek.cz" + slide?.img?.data?.attributes?.url}
                     layout={"fill"}
                     style={{ objectFit: "contain" }}
                   />

@@ -54,7 +54,7 @@ export default function Hero({ device, theme, hero }) {
                 objectFit="cover"
                 animate={true}
                 
-                src={"http://38.242.151.80:1336" + hero?.img1?.data?.attributes?.url}
+                src={"https://cms.tesla.ondrejzaplatilek.cz" + hero?.img1?.data?.attributes?.url}
               />
              </div>
             </Grid.Col>
@@ -67,7 +67,7 @@ export default function Hero({ device, theme, hero }) {
                 objectFit="cover"
                 animate={true}
                 
-                src={"http://38.242.151.80:1336" + hero?.img2?.data?.attributes?.url}
+                src={"https://cms.tesla.ondrejzaplatilek.cz" + hero?.img2?.data?.attributes?.url}
               />
              </div>
             </Grid.Col>
@@ -146,7 +146,7 @@ export default function Hero({ device, theme, hero }) {
                 objectFit="cover"
                 animate={true}
                 
-                src={"http://38.242.151.80:1336" + hero?.img1?.data?.attributes?.url}
+                src={"https://cms.tesla.ondrejzaplatilek.cz" + hero?.img1?.data?.attributes?.url}
               />
              </div>
             </Grid.Col>
@@ -159,7 +159,7 @@ export default function Hero({ device, theme, hero }) {
                 objectFit="cover"
                 animate={true}
                 
-                src={"http://38.242.151.80:1336" + hero?.img2?.data?.attributes?.url}
+                src={"https://cms.tesla.ondrejzaplatilek.cz" + hero?.img2?.data?.attributes?.url}
               />
              </div>
             </Grid.Col>

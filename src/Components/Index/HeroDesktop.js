@@ -15,12 +15,12 @@ import { StatsRingCard } from "./StatsHero";
 import { FeaturesCard } from "./CarHero";
 import { TaskCard } from "./BlogHero";
 
-export default function HeroDesktop() {
+export default function HeroDesktop({main, blog}) {
   const theme = useMantineTheme();
   const [icon, setIcon] = useState("-->");
   const [videoWidth, setVideoWidth] = useState(20.5);
   const [opacityS, setOpacity] = useState(1);
-
+console.log(main);
   useEffect(() => {
       // Přepočítáme opacity na základě videoWidth
       // Začneme s hodnotou 1 a snížíme ji na 0, jak se videoWidth zvyšuje k 80
@@ -71,15 +71,11 @@ export default function HeroDesktop() {
       >
         <div style={{ backgroundColor: "#FF7676", padding: "3vh 3vh" }}>
           <Title order={1} size={"4.5rem"}>
-            Vaše jízda, <br />
-            naše starost
+           {main?.main_text}
           </Title>
           <Space h={theme.spacing.md} />
           <Text>
-            Jsme nadšenci do rychlých aut a inovací. Baví nás rychle jezdit na
-            okruhu i si užívat klidné jízdy v příjemném interiéru luxusních aut.
-            Chceme tento zážitek poskytnout i vám a proto vám nabízíme naše
-            služby na vaší cestě.
+            {main?.main_popis}
           </Text>
         </div>
 
@@ -100,7 +96,7 @@ export default function HeroDesktop() {
               onMouseEnter={() => setIcon("--->")}
               onMouseLeave={() => setIcon("-->")}
             >
-              Pojďme jezdit
+              {main?.rezervace_btn_label}
             </Button>
           </Link>
           <Link href={"/onas"}>
@@ -115,7 +111,7 @@ export default function HeroDesktop() {
                 fontSize: "1rem",
               }}
             >
-              Více o nás
+              {main?.nabidka_btn_label}
             </Button>
           </Link>
         </div>
@@ -151,10 +147,10 @@ export default function HeroDesktop() {
                     borderRadius: "25px",
                 }}
             >
-                <Link href={"/sluzby"} style={{width: "100%", height: "100%"}}><FeaturesCard /></Link>
+                <Link href={"/sluzby"} style={{width: "100%", height: "100%"}}><FeaturesCard card={main?.Cards}/></Link>
                 <div style={{ display: "flex", flexDirection: "column", gap: "3vh", justifyContent: "space-between", height: "100%" }}>
-                    <Link href={"/rezervace"}><StatsRingCard /></Link>
-                    <Link href={"/blog"}><TaskCard /></Link>
+                    <Link href={"/rezervace"}><StatsRingCard card={main?.Cards} /></Link>
+                  <TaskCard card={main?.Cards} blog={blog}/>
                 </div>
             </div>
             <div

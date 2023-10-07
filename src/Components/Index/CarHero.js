@@ -1,6 +1,7 @@
 import { Card, Image, Text, Group, Badge, Center, Button } from '@mantine/core';
 import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons-react';
 import Link from 'next/link';
+import IconComponent from './CustomIcon';
 
 const mockdata = [
   { label: '4 passengers', icon: IconUsers },
@@ -9,7 +10,7 @@ const mockdata = [
   { label: 'Nejvyšší konfigurace P100D', icon: IconGasStation },
 ];
 
-export function FeaturesCard() {
+export function FeaturesCard({card}) {
   const features = mockdata.map((feature) => (
     <Center key={feature.label} style={{ flexDirection: 'row', alignItems: 'center' }}>
       <feature.icon size="1.05rem" style={{ marginRight: '5px', color: 'gray' }} stroke={1.5} />
@@ -38,12 +39,12 @@ export function FeaturesCard() {
 
       <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", padding: "2vh 0 0 0"}}>
         <div>
-          <Text fw={500}>Tesla Model S</Text>
+          <Text fw={500}>{card?.car_name}</Text>
           <Text fz="xs" c="dimmed">
-            Nabíjení zcela zdarma
+          {card?.car_label}
           </Text>
         </div>
-        <Badge color='red' variant="outline">25% sleva</Badge>
+        <Badge color='red' variant="outline">{card?.car_action}</Badge>
       </div>
 
       <Card.Section 
@@ -54,11 +55,19 @@ export function FeaturesCard() {
         }}
       >
         <Text fz="sm" c="dimmed" style={{ fontSize: '12px', fontWeight: '700', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '-0.25px' }}>
-          Informace o autě
+        {card?.info_label}
         </Text>
 
         <Group gap={8} mb={-8}>
-          {features}
+          {card?.info.map((item, index)=> {
+           
+            return(
+              <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "0.75vw"}}>
+               {item?.icon &&  <IconComponent icon={item.icon} size={15} />}
+                <Text size={"sm"}>{item?.text}</Text>
+              </div>
+            )
+          })}
         </Group>
       </Card.Section>
 
@@ -66,10 +75,10 @@ export function FeaturesCard() {
         <Group gap={30}>
           <div>
             <Text fz="xl" fw={700} style={{ lineHeight: 1 }}>
-              1500 Kč
+            {card?.ppt}
             </Text>
             <Text fz="sm" c="dimmed" fw={500} style={{ lineHeight: 1, marginTop: '3px' }}>
-              za hodinu
+            {card?.time}
             </Text>
           </div>
 

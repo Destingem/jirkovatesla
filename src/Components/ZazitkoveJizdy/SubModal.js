@@ -19,7 +19,7 @@ const photo = photos[activePhoto]?.attributes
         transitionProps={{ transition: 'fade', duration: 200 }}
         zIndex={10000}
       >
-        <Image objectFit="cover" style={{zIndex: 25,}} fill radius="md" animate={true} src={"http://38.242.151.80:1336" + photo.url}/>
+        <Image objectFit="cover" style={{zIndex: 25,}} fill radius="md" animate={true} src={"https://cms.tesla.ondrejzaplatilek.cz" + photo.url}/>
       </Modal>
 
    

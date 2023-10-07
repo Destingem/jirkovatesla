@@ -70,7 +70,7 @@ whyUs.items1 = [firstColumn, secondColumn]
                 objectFit="cover"
                 animate={true}
                 
-                src={"http://38.242.151.80:1336" + mainImage?.data?.attributes?.url}
+                src={"https://cms.tesla.ondrejzaplatilek.cz" + mainImage?.data?.attributes?.url}
               />
           
         </div>
@@ -104,7 +104,7 @@ whyUs.items1 = [firstColumn, secondColumn]
 
 export async function getStaticProps() {
   // recenze
-  let recenze = await fetch("http://38.242.151.80:1336/api/pronajem?populate=deep", {
+  let recenze = await fetch("https://cms.tesla.ondrejzaplatilek.cz/api/pronajem?populate=deep", {
         headers: {
             Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
         }

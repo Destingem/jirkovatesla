@@ -7,7 +7,34 @@ import OurMap from "@/Components/Kontakt/Map";
 import { useViewportSize } from "@mantine/hooks";
 import useDevice from "@/Components/hooks/useDevice";
 
-export default function Kontakt(){
+export default function Kontakt({main}){
+  let schedule = []
+  Object.keys(main.attributes).map((key, index) => {
+    var key2 = ""
+    switch(key){
+      case "pondeli": key2 = "Pondělí"
+      break;
+      case "utery": key2 = "Úterý"
+      break;
+      case "streda": key2 = "Středa"
+      break;
+      case "ctvrtek": key2 = "Čtvrtek"
+      break;
+      case "patek": key2 = "Pátek"
+      break;
+      case "sobota": key2 = "Sobota"
+      break;
+     case  "nedele": key2 = "Neděle"
+      break;
+      case "prazdniny_apod": key2 = "Prázniny"
+      break;
+      default: return
+    }
+
+    if(key !== "id" && key !== "created_at" && key !== "updated_at" ){
+      schedule.push({day: key2, hours: main.attributes[key]})
+    }
+  })
     const theme = useMantineTheme();
     const { height, width } = useViewportSize();
     const device = useDevice(width);
@@ -18,7 +45,7 @@ export default function Kontakt(){
         { heading: "datová schránka", content: "xyz52a" },
         { heading: "IČO", content: "1723599942" }
     ];
-    const schedule = [
+    const schedule0 = [
         { day: "Pondělí", hours: "8:00 - 16:20" },
         { day: "Úterý", hours: "9:00 - 18:00" },
         { day: "Středa", hours: "7:30 - 16:20" },
@@ -126,3 +153,25 @@ export default function Kontakt(){
   )
    }
 }
+
+export async function getStaticProps() {
+
+   var main = await fetch("https://cms.tesla.ondrejzaplatilek.cz/api/oteviraci-doba?populate=deep", {
+     headers: {
+         Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
+     }
+     })
+     main = await main.json()
+     console.log(main);
+     main = main?.data
+      
+
+       return ({
+       props: {
+ 
+        main,
+        
+       },
+       revalidate: 60,
+   })
+ }

@@ -25,7 +25,7 @@ export default function Post({myPost}){
                     {myPost.obrazky.data.map((obrazek, index) => {
                         return(
                             <Carousel.Slide key={index} >
-                            <Image fill src={"http://38.242.151.80:1336" + obrazek.attributes.url} objectFit="cover" />
+                            <Image fill src={"https://cms.tesla.ondrejzaplatilek.cz" + obrazek.attributes.url} objectFit="cover" />
                             </Carousel.Slide>
                         )
                                 
@@ -41,7 +41,7 @@ export default function Post({myPost}){
 
                     return(
                         <Grid.Col span={2} sx={{aspectRatio: 1, }}>
-                   <Link href={"http://38.242.151.80:1336" + soubor?.attributes?.url}>
+                   <Link href={"https://cms.tesla.ondrejzaplatilek.cz" + soubor?.attributes?.url}>
                    <div style={{backgroundColor: theme.colors.cyan[0], aspectRatio: 1, width: "80%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "10%", padding: "2vh 3vw"}}>
                      <Text color={theme.colors.cyan[7]} size={"2rem"} weight={700}>{soubor.attributes.ext}</Text>
                         <Text weight={700}>{soubor.attributes.name}</Text>
@@ -66,7 +66,7 @@ export default function Post({myPost}){
                     {myPost.obrazky.data.map((obrazek, index) => {
                         return(
                             <Carousel.Slide key={index} >
-                            <Image fill src={"http://38.242.151.80:1336" + obrazek.attributes.url} objectFit="cover" />
+                            <Image fill src={"https://cms.tesla.ondrejzaplatilek.cz" + obrazek.attributes.url} objectFit="cover" />
                             </Carousel.Slide>
                         )
                                 
@@ -82,7 +82,7 @@ export default function Post({myPost}){
 
                     return(
                         <Grid.Col span={6} sx={{aspectRatio: 1, }}>
-                   <Link href={"http://38.242.151.80:1336" + soubor?.attributes?.url}>
+                   <Link href={"https://cms.tesla.ondrejzaplatilek.cz" + soubor?.attributes?.url}>
                    <div style={{backgroundColor: theme.colors.cyan[0], aspectRatio: 1, width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "10%", padding: "2vh 3vw"}}>
                      <Text color={theme.colors.cyan[7]} size={"2rem"} weight={700}>{soubor.attributes.ext}</Text>
                         <Text weight={700}>{soubor.attributes.name}</Text>
@@ -100,7 +100,7 @@ export default function Post({myPost}){
 
 
 export async function getStaticPaths() {
-    const response = await fetch("http://38.242.151.80:1336/api/blogs?populate=deep", {
+    const response = await fetch("https://cms.tesla.ondrejzaplatilek.cz/api/blogs?populate=deep", {
         headers: {
             Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
         }
@@ -117,7 +117,7 @@ export async function getStaticPaths() {
   export async function getStaticProps(blog) {
     
   
-        var allPosts = await fetch("http://38.242.151.80:1336/api/blogs?populate=deep", {
+        var allPosts = await fetch("https://cms.tesla.ondrejzaplatilek.cz/api/blogs?populate=deep", {
           headers: {
               Authorization: "Bearer " + process.env.NEXT_PUBLIC_STRAPI_JWT,
           }
